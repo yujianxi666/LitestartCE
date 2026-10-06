@@ -13,7 +13,7 @@ Cutting out the clutter, LitestartCE aims to provide you with a seamless, fast, 
 > further developed by [KeepHope2901](https://github.com/yujianxi666) on top of the original by adding more personalization options.
 > The original Litestart is developed by [XingYue_Fox](https://xingyuefox.pages.dev) and [AomiRaku](https://raku404.com/),
 > and all of the original design and the vast majority of the code come from upstream, under the MIT license.
-
+> Preview: [LitestartCE](https://yujianxi666.github.io/LitestartCE)
 ***
 
 ## A more personalized, second-development version of Litestart

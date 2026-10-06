@@ -13,7 +13,7 @@
 > 由 [KeepHope2901](https://github.com/yujianxi666) 在原版基础上增加更多个性化设置二次开发。
 > 原版 Litestart 由 [星月Fox](https://xingyuefox.pages.dev) 与 [AomiRaku](https://raku404.com/) 开发，
 > 本分支的全部基础设计与绝大部分代码都来自原版，遵循 MIT 协议。
-
+> 预览效果 [LitestartCE](https://yujianxi666.github.io/LitestartCE)
 ***
 
 ## 更加个性化的Litestart二次开发版
