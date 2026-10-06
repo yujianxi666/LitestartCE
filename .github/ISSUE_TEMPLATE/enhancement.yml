@@ -1,7 +1,7 @@
 name: 增强 Enhancement
 description: 提供新功能或者现有功能增强建议 Suggest new features or enhancements to existing features
 labels: ["Enhancement"]
-assignees: "XingYueFox"
+assignees: "yujianxi666"
 
 body:
   - type: markdown
@@ -37,6 +37,6 @@ body:
       label: 原因 | Reason
       description: |
         请描述该功能带来的好处或者原因。
-        Please describe why you want to add the feature or enhancement to Litestart.
+        Please describe why you want to add the feature or enhancement to LitestartCE.
     validations:
       required: true

@@ -74,6 +74,10 @@
       --settings-thumb-bg: #e1e4e8;
       --settings-thumb-border: #c8c8c8;
 
+      /* 设置项分组小块的边界/底色：比卡片边框更深更粗，方便一眼分辨分组 */
+      --settings-group-border: #bfbfbf;
+      --settings-group-bg: #fbfbfb;
+
       --enhanced-visibility-bg: rgba(255, 255, 255, 0.3);
       --enhanced-visibility-bg-hover: rgba(255, 255, 255, 0.5);
       --enhanced-visibility-logo-bg: rgba(255, 255, 255, 0.6);
@@ -128,6 +132,10 @@
         --settings-thumb-bg: #212121;
         --settings-thumb-border: #3d3d3d;
 
+        /* 设置项分组小块的边界/底色：暗色下用比卡片更亮一档的灰，边界看得清 */
+        --settings-group-border: #4d4d4d;
+        --settings-group-bg: #232323;
+
         --enhanced-visibility-bg: rgba(0, 0, 0, 0.3);
         --enhanced-visibility-bg-hover: rgba(0, 0, 0, 0.5);
         --enhanced-visibility-logo-bg: rgba(0, 0, 0, 0.6);
@@ -169,7 +177,9 @@
     }
 
     /* 背景图/视频 —— 默认透明，加载完成后通过 .loaded 触发渐入 */
-    #bg-video, #bg-image {
+    /* #bg-video-freeze 是视频壁纸的"静态帧"替身（设置面板等浮层打开时顶替视频层，防止闪黑），
+       它必须和视频层吃同一套模糊/缩放，否则调模糊滑块时画面不会实时变化 */
+    #bg-video, #bg-image, #bg-video-freeze {
       position: absolute;
       top: 0;
       left: 0;
@@ -179,9 +189,24 @@
       display: none;
       opacity: 0;
       transition: opacity 0.2s ease-in;
+      /* 模糊程度（背景卡片里的滑块写入，默认 0 = 不模糊） */
+      filter: blur(var(--bg-blur, 0px));
       /* 自身也固定在自己的合成层里，减少层增删带来的视频黑帧 */
       transform: translateZ(0);
       will-change: opacity;
+    }
+
+    /* 静态帧替身由脚本控制 display，不参与渐入，且常驻不透明 */
+    #bg-video-freeze {
+      opacity: 1;
+    }
+
+    /* 模糊会糊掉边缘像素，容器放大一点把虚边挤出可视区（未模糊时不放大，避免浪费）。
+       选择器带 #background-container 才压得住下面 #bg-video/#bg-image 的 transform */
+    #background-container.blurred #bg-video,
+    #background-container.blurred #bg-image,
+    #background-container.blurred #bg-video-freeze {
+      transform: translateZ(0) scale(1.08);
     }
 
     #bg-video.loaded, #bg-image.loaded {
@@ -452,6 +477,82 @@
       margin-top: 4px;
     }
 
+    /* ===== 设置项分组小块 =====
+       比外面的大卡片再包一层：边界更粗更深 + 独立底色，让一组设置一眼可辨 */
+    .settings-block {
+      border: 1.5px solid var(--settings-group-border);
+      background-color: var(--settings-group-bg);
+      border-radius: 6px;
+      padding: 10px;
+      box-sizing: border-box;
+    }
+
+    .settings-block + .settings-block {
+      margin-top: 8px;
+    }
+
+    .settings-block-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--settings-text-primary);
+      margin-bottom: 8px;
+    }
+
+    .settings-block-hint {
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--settings-text-secondary);
+      margin-top: 8px;
+    }
+
+    /* ===== 滑块行 + 右侧小控件（重置 / 加减） ===== */
+    .slider-label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .slider-controls {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+
+    /* 方形圆角小按钮：重置 / 调小 / 调大 */
+    .mini-btn {
+      width: 22px;
+      height: 22px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: 1.5px solid var(--settings-group-border);
+      border-radius: 5px;
+      background-color: var(--settings-card-bg);
+      color: var(--settings-text-secondary);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background-color 0.08s ease, color 0.08s ease, border-color 0.08s ease;
+    }
+
+    .mini-btn:hover {
+      background-color: var(--settings-card-hover);
+      color: var(--settings-text-primary);
+      border-color: var(--settings-text-secondary);
+    }
+
+    .mini-btn:active {
+      background-color: var(--settings-thumb-bg);
+    }
+
+    .mini-btn svg {
+      width: 12px;
+      height: 12px;
+      display: block;
+    }
+
     .setting-slider {
       flex: 1;
       min-width: 0;
@@ -600,7 +701,8 @@
       width: 100%;
       height: 32px;
       border-radius: 6px;
-      border: 1px solid var(--settings-card-border);
+      /* 边界加粗加深：浅色/深色下都更容易看见控件范围 */
+      border: 1.5px solid var(--settings-group-border);
       background-color: var(--settings-card-bg);
       color: var(--settings-text-primary);
       padding: 0 12px 0 10px;
@@ -620,7 +722,6 @@
 
     .custom-select-display.active {
       border-color: var(--accent-foreground-rest);
-      border-width: 1px; 
     }
 
     /* 下拉箭头旋转动画 */
@@ -733,7 +834,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      border: 1px solid var(--settings-text-secondary);
+      /* 开关边界加粗加深，避免在卡片底色上看不清开关位置 */
+      border: 1.5px solid var(--settings-group-border);
       background-color: var(--settings-card-bg);
       transition: background-color 0.08s ease, border-color 0.08s ease, left 0.2s ease;
       border-radius: 20px;
@@ -862,6 +964,29 @@
       background-color: var(--settings-card-hover);
     }
 
+    /* 同一张卡片里并排的次要按钮（如更换图标 / 恢复原版图标） */
+    .icon-btn-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn-row .icon-btn-text {
+      flex: 1 1 0;
+      min-width: 0;
+      margin-top: 8px;
+      padding: 0 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .icon-btn-row .icon-btn-text > span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     /* 底部链接样式 */
     .settings-footer {
       padding: 8px 16px 16px 16px;
@@ -895,13 +1020,11 @@
       display: grid;
       /* 布局微调：间距/对齐/偏移由脚本写入 --layout-* 变量（见「页面布局」页） */
       grid-template-rows: 1fr auto var(--layout-gap-title, 72px) 46px var(--layout-gap-links, 64px) 0px auto 1fr;
-      /* 元素对齐：居中=各自居中（主体位置不变）；
-         靠左/靠右=三个元素的左端/右端对齐到同一条基准线（脚本按搜索框宽度算出的内缩量），
-         因为两侧内缩相等，最宽的搜索框位置不变 */
-      justify-items: var(--layout-align, center);
+      /* 元素对齐：靠左/靠右由下面各自的 justify-self 处理；
+         这里保持居中，绝不改成 start/end —— 那会把「搜索框」一起推到行边缘，
+         而搜索框在靠左/靠右时应当停在原地 */
+      justify-items: center;
       box-sizing: border-box;
-      padding-left: var(--layout-align-inset, 0px);
-      padding-right: var(--layout-align-inset, 0px);
       position: absolute;
       top: 0;
       width: 100%;
@@ -909,6 +1032,16 @@
       z-index: 2;
       /* 水平/垂直偏移 */
       transform: translate(var(--layout-offset-x, 0px), var(--layout-offset-y, 0px));
+    }
+
+    /* 靠左/靠右时：标题与快速链接向内收，落在搜索框边界里面一点。
+       用 margin 而不是 padding —— padding 只会推内容、元素自身的盒子仍从行首开始，
+       那样"左端对齐"量出来还是贴着屏幕边；margin 会把盒子本身挪进来。
+       内缩量只加在它们自己身上，搜索框完全不受影响 */
+    #logo {
+      margin-left: var(--layout-align-inset-left, 0px);
+      margin-right: var(--layout-align-inset-right, 0px);
+      justify-self: var(--layout-align-edge, center);
     }
 
     #logo {
@@ -919,6 +1052,12 @@
       justify-content: center;
       gap: 14px;
       height: 48px;
+      /* 元素大小：整体等比缩放。
+         注意不能用改 height 的办法 —— 内置 logo 是带固定 width/height 属性的内联 SVG，
+         改 CSS 高度并不会让它变大，只有 transform 一定生效。
+         网格行高保持 48px 不变，所以放大缩小都不会顶动搜索框 */
+      transform: scale(var(--layout-scale-logo, 1));
+      transform-origin: var(--layout-scale-origin, center center);
     }
 
     #logo-text-path {
@@ -943,6 +1082,11 @@
       position: relative;
       width: 760px;
       z-index: 5;
+      /* 元素大小：整体等比缩放。缩放基点跟随对齐方式（脚本写 --layout-scale-origin）：
+         居中=中心缩放；靠左=以左端为基点；靠右=以右端为基点。
+         否则放大后会被推离对齐基准线，「左端对齐」就名不副实了 */
+      transform: scale(var(--layout-scale-search, 1));
+      transform-origin: var(--layout-scale-origin, center center);
     }
 
     #search-container.suggestions-open, #search-container:focus-within {
@@ -956,7 +1100,8 @@
       width: 100%;
       box-sizing: border-box;
       background-color: var(--neutral-layer-floating);
-      border-radius: 22px;
+      /* 形状：圆形（原样 22px）/ 方形（小圆角 8px），由「页面布局 → 搜索框形状」写入 */
+      border-radius: var(--search-radius, 22px);
       height: 46px;
       gap: 7px;
       color: var(--neutral-foreground-rest);
@@ -1131,6 +1276,13 @@
       align-items: center;
       gap: 16px;
       overflow: visible;
+      /* 靠左/靠右时的内缩（与标题同一套变量，保证两者对齐到同一条线） */
+      margin-left: var(--layout-align-inset-left, 0px);
+      margin-right: var(--layout-align-inset-right, 0px);
+      justify-self: var(--layout-align-edge, center);
+      /* 元素大小：整体等比缩放，基点跟随对齐方式（同搜索框） */
+      transform: scale(var(--layout-scale-links, 1));
+      transform-origin: var(--layout-scale-origin, center center);
     }
 
     ntp-quicklinks[rows="0"] {
@@ -1162,7 +1314,8 @@
     .quicklink-icon {
       width: 38px;
       height: 38px;
-      border-radius: 50%;
+      /* 快速链接图标形状：圆形（原样）/ 方形（小圆角），由「页面布局 → 快速链接形状」写入 */
+      border-radius: var(--quicklink-radius, 50%);
       background-color: var(--neutral-layer-floating);
       color: var(--neutral-foreground-rest);
       display: flex;
@@ -1832,7 +1985,7 @@
       <!-- 顶部导航栏 -->
       <div id="header">
         <div id="header-left">
-          <button id="waffle" class="header-button" type="button" aria-label="Litestart~" title="Litestart~">
+          <button id="waffle" class="header-button" type="button" aria-label="LitestartCE~" title="LitestartCE~">
             <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 17a2 2 0 110 4 2 2 0 010-4zm7 0a2 2 0 110 4 2 2 0 010-4zM5 17a2 2 0 110 4 2 2 0 010-4zm7-7a2 2 0 110 4 2 2 0 010-4zm7 0a2 2 0 110 4 2 2 0 010-4zM5 10a2 2 0 110 4 2 2 0 010-4zm7-7a2 2 0 110 4 2 2 0 010-4zm7 0a2 2 0 110 4 2 2 0 010-4zM5 3a2 2 0 110 4 2 2 0 010-4z">
               </path>
@@ -1846,7 +1999,7 @@
           <!-- 左侧菜单 -->
           <div id="popover-waffle" class="popover-panel" style="background-color: var(--settings-panel-bg); padding: 0; overflow: hidden;">
             <div class="settings-header">
-              <h2 class="settings-title">Litestart</h2>
+              <h2 class="settings-title">LitestartCE</h2>
             </div>
             <div style="padding: 12px;">
 
@@ -1859,7 +2012,7 @@
              <!-- 关于 -->
             <div class="waffle-menu-item" id="btn-about">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="128" height="128"><path d="M8.499 7.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm.25-2a.749.749 0 1 1-1.499 0a.749.749 0 0 1 1.498 0M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1M2 8a6 6 0 1 1 12 0A6 6 0 0 1 2 8"/></svg>
-              <span data-i18n="aboutTitle">关于 Litestart</span>
+              <span data-i18n="aboutTitle">关于 LitestartCE</span>
             </div>
             </div>
           </div>
@@ -1924,6 +2077,18 @@
                   <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M11.013 1.427a1.75 1.75 0 0 1 2.474 0l1.086 1.086a1.75 1.75 0 0 1 0 2.474l-8.61 8.61c-.21.21-.47.364-.756.445l-3.251.93a.75.75 0 0 1-.927-.928l.93-3.25a1.75 1.75 0 0 1 .445-.758l8.61-8.609z"/></svg>
                   <span data-i18n="editCustomEngine">编辑自定义搜索引擎</span>
                 </button>
+                <!-- 直接更换当前搜索引擎的图标 / 恢复原版图标（自定义引擎走上面的编辑弹窗） -->
+                <div id="engine-icon-actions" class="icon-btn-row">
+                  <button id="btn-change-engine-icon" class="icon-btn-text" type="button">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/><path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1z"/></svg>
+                    <span data-i18n="changeEngineIcon">更换图标</span>
+                  </button>
+                  <button id="btn-reset-engine-icon" class="icon-btn-text" style="display:none;" type="button">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/></svg>
+                    <span data-i18n="resetEngineIcon">恢复原版图标</span>
+                  </button>
+                </div>
+                <input type="file" id="input-quick-engine-logo" class="file-input-hidden" accept="image/*">
                 <div id="force-bing-cn-row" class="setting-row" style="display:none; margin-top: 8px;">
                   <div class="setting-label-group">
                     <span data-i18n="forceBingCN">强制使用必应中国版</span>
@@ -2023,6 +2188,14 @@
                     </svg>
                   </div>
                 </div>
+                <!-- 背景模糊程度 -->
+                <div class="setting-slider-block">
+                  <div class="setting-label-group" data-i18n="bgBlur">背景模糊程度</div>
+                  <div class="setting-slider-line">
+                    <input type="range" class="setting-slider" id="range-bg-blur" min="0" max="24" step="1" value="0" aria-label="背景模糊程度" data-i18n-aria="bgBlur">
+                    <span class="setting-slider-value" id="value-bg-blur">0px</span>
+                  </div>
+                </div>
               </div>
 
               <!-- 页面语言选择卡片 -->
@@ -2055,12 +2228,12 @@
               <div class="settings-footer-links">
                 <a href="PRIVACY_POLICY.md" data-i18n="cookieNotice">隐私与 Cookie</a> · 
                 <a href="LICENSE" data-i18n="license">开源协议</a> ·  
-                <a href="https://github.com/XingYueFox/Litestart/graphs/contributors?from=2026%2F5%2F23" data-i18n="contributor">贡献名单</a> · 
-                <a href="https://github.com/XingYueFox/Litestart/issues" data-i18n="helpFeedback">帮助&反馈</a>
+                <a href="https://github.com/yujianxi666/LitestartCE/graphs/contributors?from=2026%2F5%2F23" data-i18n="contributor">贡献名单</a> · 
+                <a href="https://github.com/yujianxi666/LitestartCE/issues" data-i18n="helpFeedback">帮助&反馈</a>
                 
               </div>
               <div class="settings-footer-links">
-                <a href="#" id="btn-footer-version">LiteStart 1.7.2</a>| <span data-i18n="presentedBy">由</span> <a href="https://xingyuefox.pages.dev" target="_blank" data-i18n="xingyuefox">星月Fox</a> <span data-i18n="forYou">为您呈现</span>
+                <a href="#" id="btn-footer-version">LitestartCE 1.7.2</a>| <span data-i18n="developedBy">由</span> <a href="https://github.com/yujianxi666" target="_blank" rel="noopener">KeepHope2901</a> <span data-i18n="secondDev">二次开发</span>
               </div>
               <div class="settings-footer-text" style="opacity: 0.8;" data-i18n="disclaimer">
                 请注意，此网页与 Microsoft 无关。
@@ -2085,109 +2258,245 @@
               </div>
 
               <div class="settings-content">
-                <!-- 搜索框位置 -->
+                <!-- 小块 1：搜索框位置与形状 -->
                 <div class="settings-card">
-                  <div class="settings-card-title" data-i18n="searchBoxPosition">搜索框位置</div>
-                  <div class="custom-select-wrapper">
-                    <select id="select-layout" class="select-box" tabindex="-1" aria-label="搜索框位置">
-                      <option value="inspirational" data-i18n="layoutHanging">悬挂</option>
-                      <option value="focused" data-i18n="layoutCentered">居中</option>
-                      <option value="hidden" data-i18n="layoutHidden">关闭</option>
-                    </select>
-                    <div class="custom-select-display" data-for="select-layout">
-                      <span class="custom-select-text"></span>
-                      <svg class="custom-select-arrow" viewBox="0 0 12 12" fill="none">
-                        <path d="M2.22 4.47a.75.75 0 0 1 1.06 0L6 7.19l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L2.22 5.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/>
-                      </svg>
+                  <div class="settings-block">
+                    <div class="settings-block-title" data-i18n="searchBoxPosition">搜索框位置</div>
+                    <div class="custom-select-wrapper">
+                      <select id="select-layout" class="select-box" tabindex="-1" aria-label="搜索框位置">
+                        <option value="inspirational" data-i18n="layoutHanging">悬挂</option>
+                        <option value="focused" data-i18n="layoutCentered">居中</option>
+                        <option value="hidden" data-i18n="layoutHidden">关闭</option>
+                      </select>
+                      <div class="custom-select-display" data-for="select-layout">
+                        <span class="custom-select-text"></span>
+                        <svg class="custom-select-arrow" viewBox="0 0 12 12" fill="none">
+                          <path d="M2.22 4.47a.75.75 0 0 1 1.06 0L6 7.19l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L2.22 5.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 搜索框形状 -->
+                  <div class="settings-block">
+                    <div class="settings-block-title" data-i18n="searchBoxShape">搜索框形状</div>
+                    <div class="custom-select-wrapper">
+                      <select id="select-search-shape" class="select-box" tabindex="-1" aria-label="搜索框形状">
+                        <option value="round" data-i18n="shapeRound">圆形</option>
+                        <option value="square" data-i18n="shapeSquare">方形</option>
+                      </select>
+                      <div class="custom-select-display" data-for="select-search-shape">
+                        <span class="custom-select-text"></span>
+                        <svg class="custom-select-arrow" viewBox="0 0 12 12" fill="none">
+                          <path d="M2.22 4.47a.75.75 0 0 1 1.06 0L6 7.19l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L2.22 5.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 快速链接形状 -->
+                  <div class="settings-block">
+                    <div class="settings-block-title" data-i18n="linksShape">快速链接形状</div>
+                    <div class="custom-select-wrapper">
+                      <select id="select-links-shape" class="select-box" tabindex="-1" aria-label="快速链接形状">
+                        <option value="round" data-i18n="shapeRound">圆形</option>
+                        <option value="square" data-i18n="shapeSquare">方形</option>
+                      </select>
+                      <div class="custom-select-display" data-for="select-links-shape">
+                        <span class="custom-select-text"></span>
+                        <svg class="custom-select-arrow" viewBox="0 0 12 12" fill="none">
+                          <path d="M2.22 4.47a.75.75 0 0 1 1.06 0L6 7.19l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L2.22 5.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/>
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- 显示标题 / 显示菜单按钮 / 显示时间 -->
+                <!-- 小块 2：显示开关 -->
                 <div class="settings-card">
-                  <div class="setting-row" style="margin-bottom: 12px;">
-                    <div class="setting-label-group" data-i18n="showLogo">显示标题</div>
-                    <div class="switch-container">
-                      <span class="setting-status-text" id="status-logo" data-i18n="on">打开</span>
-                      <label class="switch">
-                        <input type="checkbox" id="toggle-logo-switch" checked>
-                        <span class="slider"></span>
-                      </label>
+                  <div class="settings-block">
+                    <div class="setting-row" style="margin-bottom: 12px;">
+                      <div class="setting-label-group" data-i18n="showLogo">显示标题</div>
+                      <div class="switch-container">
+                        <span class="setting-status-text" id="status-logo" data-i18n="on">打开</span>
+                        <label class="switch">
+                          <input type="checkbox" id="toggle-logo-switch" checked>
+                          <span class="slider"></span>
+                        </label>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="setting-row" style="margin-bottom: 12px;">
-                    <div class="setting-label-group" data-i18n="showMenuButton">显示菜单按钮</div>
-                    <div class="switch-container">
-                      <span class="setting-status-text" id="status-menu-button" data-i18n="on">打开</span>
-                      <label class="switch">
-                        <input type="checkbox" id="toggle-menu-button-switch" checked>
-                        <span class="slider"></span>
-                      </label>
+                    <div class="setting-row" style="margin-bottom: 12px;">
+                      <div class="setting-label-group" data-i18n="showMenuButton">显示菜单按钮</div>
+                      <div class="switch-container">
+                        <span class="setting-status-text" id="status-menu-button" data-i18n="on">打开</span>
+                        <label class="switch">
+                          <input type="checkbox" id="toggle-menu-button-switch" checked>
+                          <span class="slider"></span>
+                        </label>
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="setting-row">
-                    <div class="setting-label-group" data-i18n="showTimeCapsule">显示时间</div>
-                    <div class="switch-container">
-                      <span class="setting-status-text" id="status-time-capsule" data-i18n="off">关闭</span>
-                      <label class="switch">
-                        <input type="checkbox" id="toggle-time-capsule-switch">
-                        <span class="slider"></span>
-                      </label>
+                    <div class="setting-row">
+                      <div class="setting-label-group" data-i18n="showTimeCapsule">显示时间</div>
+                      <div class="switch-container">
+                        <span class="setting-status-text" id="status-time-capsule" data-i18n="off">关闭</span>
+                        <label class="switch">
+                          <input type="checkbox" id="toggle-time-capsule-switch">
+                          <span class="slider"></span>
+                        </label>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                <!-- 元素间距 / 对齐 / 垂直偏移 -->
+                <!-- 小块 3：元素排布（四个滑块 + 重置） -->
                 <div class="settings-card">
-                  <div class="settings-card-title" data-i18n="elementSpacing">元素排布</div>
+                  <div class="settings-block">
+                    <div class="settings-block-title" data-i18n="elementSpacing">元素排布</div>
 
-                  <div class="setting-slider-block">
-                    <div class="setting-label-group" data-i18n="layoutGapTitle">标题与搜索框间距</div>
-                    <div class="setting-slider-line">
-                      <input type="range" class="setting-slider" id="range-gap-title" min="0" max="200" step="4" value="72">
-                      <span class="setting-slider-value" id="value-gap-title">72px</span>
+                    <div class="setting-slider-block">
+                      <div class="slider-label-row">
+                        <div class="setting-label-group" data-i18n="layoutGapTitle">标题与搜索框间距</div>
+                        <button type="button" class="mini-btn" data-reset-slider="range-gap-title" title="重置为默认值" data-i18n-title="resetSlider">
+                          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/></svg>
+                        </button>
+                      </div>
+                      <div class="setting-slider-line">
+                        <input type="range" class="setting-slider" id="range-gap-title" min="0" max="200" step="4" value="72">
+                        <span class="setting-slider-value" id="value-gap-title">72px</span>
+                      </div>
+                    </div>
+
+                    <div class="setting-slider-block">
+                      <div class="slider-label-row">
+                        <div class="setting-label-group" data-i18n="layoutGapLinks">搜索框与快捷方式间距</div>
+                        <button type="button" class="mini-btn" data-reset-slider="range-gap-links" title="重置为默认值" data-i18n-title="resetSlider">
+                          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/></svg>
+                        </button>
+                      </div>
+                      <div class="setting-slider-line">
+                        <input type="range" class="setting-slider" id="range-gap-links" min="0" max="200" step="4" value="64">
+                        <span class="setting-slider-value" id="value-gap-links">64px</span>
+                      </div>
+                    </div>
+
+                    <div class="setting-slider-block">
+                      <div class="slider-label-row">
+                        <div class="setting-label-group" data-i18n="layoutOffsetX">水平偏移</div>
+                        <button type="button" class="mini-btn" data-reset-slider="range-offset-x" title="重置为默认值" data-i18n-title="resetSlider">
+                          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/></svg>
+                        </button>
+                      </div>
+                      <div class="setting-slider-line">
+                        <input type="range" class="setting-slider" id="range-offset-x" min="-400" max="400" step="4" value="0">
+                        <span class="setting-slider-value" id="value-offset-x">0px</span>
+                      </div>
+                    </div>
+
+                    <div class="setting-slider-block">
+                      <div class="slider-label-row">
+                        <div class="setting-label-group" data-i18n="layoutOffsetY">垂直偏移</div>
+                        <button type="button" class="mini-btn" data-reset-slider="range-offset-y" title="重置为默认值" data-i18n-title="resetSlider">
+                          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/></svg>
+                        </button>
+                      </div>
+                      <div class="setting-slider-line">
+                        <input type="range" class="setting-slider" id="range-offset-y" min="-240" max="240" step="4" value="0">
+                        <span class="setting-slider-value" id="value-offset-y">0px</span>
+                      </div>
                     </div>
                   </div>
+                </div>
 
-                  <div class="setting-slider-block">
-                    <div class="setting-label-group" data-i18n="layoutGapLinks">搜索框与快捷方式间距</div>
-                    <div class="setting-slider-line">
-                      <input type="range" class="setting-slider" id="range-gap-links" min="0" max="200" step="4" value="64">
-                      <span class="setting-slider-value" id="value-gap-links">64px</span>
+                <!-- 小块 4：元素大小（logo / 搜索框 / 快速链接 各自缩放） -->
+                <div class="settings-card">
+                  <div class="settings-block">
+                    <div class="settings-block-title" data-i18n="elementSize">元素大小</div>
+
+                    <div class="setting-slider-block">
+                      <div class="slider-label-row">
+                        <div class="setting-label-group" data-i18n="sizeLogo">标题大小</div>
+                        <div class="slider-controls">
+                          <button type="button" class="mini-btn" data-size-step="-1" data-size-target="range-size-logo" title="调小" data-i18n-title="sizeSmaller">
+                            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 8a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 8"/></svg>
+                          </button>
+                          <button type="button" class="mini-btn" data-reset-slider="range-size-logo" title="重置为默认值" data-i18n-title="resetSlider">
+                            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/></svg>
+                          </button>
+                          <button type="button" class="mini-btn" data-size-step="1" data-size-target="range-size-logo" title="调大" data-i18n-title="sizeLarger">
+                            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.75 2.75a.75.75 0 0 0-1.5 0V7.25H2.75a.75.75 0 0 0 0 1.5H7.25v4.5a.75.75 0 0 0 1.5 0V8.75h4.5a.75.75 0 0 0 0-1.5H8.75z"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="setting-slider-line">
+                        <input type="range" class="setting-slider" id="range-size-logo" min="60" max="160" step="5" value="100" aria-label="标题大小" data-i18n-aria="sizeLogo">
+                        <span class="setting-slider-value" id="value-size-logo">100%</span>
+                      </div>
+                    </div>
+
+                    <div class="setting-slider-block">
+                      <div class="slider-label-row">
+                        <div class="setting-label-group" data-i18n="sizeSearch">搜索框大小</div>
+                        <div class="slider-controls">
+                          <button type="button" class="mini-btn" data-size-step="-1" data-size-target="range-size-search" title="调小" data-i18n-title="sizeSmaller">
+                            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 8a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 8"/></svg>
+                          </button>
+                          <button type="button" class="mini-btn" data-reset-slider="range-size-search" title="重置为默认值" data-i18n-title="resetSlider">
+                            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/></svg>
+                          </button>
+                          <button type="button" class="mini-btn" data-size-step="1" data-size-target="range-size-search" title="调大" data-i18n-title="sizeLarger">
+                            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.75 2.75a.75.75 0 0 0-1.5 0V7.25H2.75a.75.75 0 0 0 0 1.5H7.25v4.5a.75.75 0 0 0 1.5 0V8.75h4.5a.75.75 0 0 0 0-1.5H8.75z"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="setting-slider-line">
+                        <input type="range" class="setting-slider" id="range-size-search" min="60" max="160" step="5" value="100" aria-label="搜索框大小" data-i18n-aria="sizeSearch">
+                        <span class="setting-slider-value" id="value-size-search">100%</span>
+                      </div>
+                    </div>
+
+                    <div class="setting-slider-block">
+                      <div class="slider-label-row">
+                        <div class="setting-label-group" data-i18n="sizeLinks">快速链接大小</div>
+                        <div class="slider-controls">
+                          <button type="button" class="mini-btn" data-size-step="-1" data-size-target="range-size-links" title="调小" data-i18n-title="sizeSmaller">
+                            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 8a.75.75 0 0 1 .75-.75h10.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 8"/></svg>
+                          </button>
+                          <button type="button" class="mini-btn" data-reset-slider="range-size-links" title="重置为默认值" data-i18n-title="resetSlider">
+                            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/><path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/></svg>
+                          </button>
+                          <button type="button" class="mini-btn" data-size-step="1" data-size-target="range-size-links" title="调大" data-i18n-title="sizeLarger">
+                            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8.75 2.75a.75.75 0 0 0-1.5 0V7.25H2.75a.75.75 0 0 0 0 1.5H7.25v4.5a.75.75 0 0 0 1.5 0V8.75h4.5a.75.75 0 0 0 0-1.5H8.75z"/></svg>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="setting-slider-line">
+                        <input type="range" class="setting-slider" id="range-size-links" min="60" max="160" step="5" value="100" aria-label="快速链接大小" data-i18n-aria="sizeLinks">
+                        <span class="setting-slider-value" id="value-size-links">100%</span>
+                      </div>
                     </div>
                   </div>
+                </div>
 
-                  <div class="setting-slider-block">
-                    <div class="setting-label-group" data-i18n="layoutOffsetX">水平偏移</div>
-                    <div class="setting-slider-line">
-                      <input type="range" class="setting-slider" id="range-offset-x" min="-400" max="400" step="4" value="0">
-                      <span class="setting-slider-value" id="value-offset-x">0px</span>
+                <!-- 小块 5：元素对齐 -->
+                <div class="settings-card">
+                  <div class="settings-block">
+                    <div class="settings-block-title" data-i18n="layoutAlign">元素对齐</div>
+                    <div class="custom-select-wrapper">
+                      <select id="select-layout-align" class="select-box" tabindex="-1" aria-label="元素对齐">
+                        <option value="left" data-i18n="alignLeft">左端对齐</option>
+                        <option value="center" data-i18n="alignCenter">居中</option>
+                        <option value="right" data-i18n="alignRight">右端对齐</option>
+                      </select>
+                      <div class="custom-select-display" data-for="select-layout-align">
+                        <span class="custom-select-text"></span>
+                        <svg class="custom-select-arrow" viewBox="0 0 12 12" fill="none">
+                          <path d="M2.22 4.47a.75.75 0 0 1 1.06 0L6 7.19l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L2.22 5.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/>
+                        </svg>
+                      </div>
                     </div>
-                  </div>
-
-                  <div class="setting-slider-block">
-                    <div class="setting-label-group" data-i18n="layoutOffsetY">垂直偏移</div>
-                    <div class="setting-slider-line">
-                      <input type="range" class="setting-slider" id="range-offset-y" min="-240" max="240" step="4" value="0">
-                      <span class="setting-slider-value" id="value-offset-y">0px</span>
-                    </div>
-                  </div>
-
-                  <div class="settings-card-title" style="margin-top: 12px;" data-i18n="layoutAlign">元素对齐</div>
-                  <div class="custom-select-wrapper">
-                    <select id="select-layout-align" class="select-box" tabindex="-1" aria-label="元素对齐">
-                      <option value="left" data-i18n="alignLeft">左端对齐</option>
-                      <option value="center" data-i18n="alignCenter">居中</option>
-                      <option value="right" data-i18n="alignRight">右端对齐</option>
-                    </select>
-                    <div class="custom-select-display" data-for="select-layout-align">
-                      <span class="custom-select-text"></span>
-                      <svg class="custom-select-arrow" viewBox="0 0 12 12" fill="none">
-                        <path d="M2.22 4.47a.75.75 0 0 1 1.06 0L6 7.19l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L2.22 5.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/>
-                      </svg>
-                    </div>
+                    <div class="settings-block-hint" data-i18n="alignHint">左端 / 右端对齐是与下方快速链接的左右边界对齐</div>
                   </div>
                 </div>
               </div>
@@ -2465,7 +2774,7 @@
     <!-- 关于弹窗 -->
     <div id="modal-about" class="modal-overlay">
       <div class="modal-dialog">
-        <div class="modal-header" data-i18n="aboutTitle">关于 Litestart</div>
+        <div class="modal-header" data-i18n="aboutTitle">关于 LitestartCE</div>
         <p style="margin: 0; opacity: 0.7; font-size: 13px;" data-i18n="litever">版本 1.7.2 | 更新时间：2026-10-4</p><br>
         
         <!-- 可用更新提示框 -->
@@ -2473,7 +2782,7 @@
           <div class="update-notice-info">
             <div class="update-notice-title" data-i18n="updateAvailable">可用更新</div>
             <div class="update-notice-version">
-              <span>Litestart <span id="update-version-text"></span></span>
+              <span>LitestartCE <span id="update-version-text"></span></span>
             </div>
           </div>
           <a id="update-download-btn" class="btn btn-primary" href="#" target="_blank" rel="noopener" data-i18n="download">下载</a>
@@ -2481,12 +2790,14 @@
 
         <div style="padding: 8px 0 16px 0; color: var(--neutral-foreground-rest); font-size: 14px; line-height: 1.8;">
           <p style="margin: 0 0 8px 0;" data-i18n="aboutDesc">一个简洁、快速的浏览器起始页。</p>
+          <p style="margin: 0 0 8px 0; opacity: 0.75; font-size: 13px;" data-i18n="aboutEdition">LitestartCE 是 Litestart 的二次开发版本</p>
+          <p style="margin: 0 0 8px 0; font-size: 13px;">
+            <span data-i18n-html="aboutUpstream">基于 <a href="https://github.com/XingYueFox/Litestart" target="_blank" rel="noopener" style="color: var(--accent-foreground-rest); ">Litestart</a></span>
+          </p>
             <p style="margin: 0 0 4px 0;">
-            <span data-i18n="presentedBy">由</span> 
-            <a href="https://xingyuefox.pages.dev" target="_blank" style="color: var(--accent-foreground-rest); " data-i18n="xingyuefox">XingYue_Fox</a>
-            <span data-i18n="and">和</span> 
-            <a href="https://raku404.com/" target="_blank" style="color: var(--accent-foreground-rest); " data-i18n="AomiRaku">AomiRaku</a>
-            <span data-i18n="forYou">为您呈现</span>
+            <span data-i18n="developedBy">由</span> 
+            <a href="https://github.com/yujianxi666" target="_blank" rel="noopener" style="color: var(--accent-foreground-rest); ">KeepHope2901</a>
+            <span data-i18n="secondDev">二次开发</span>
           </p>
 
 
@@ -2545,9 +2856,9 @@
     <!-- 重置确认弹窗 -->
     <div id="modal-reset-confirm" class="modal-overlay">
       <div class="modal-dialog">
-        <div class="modal-header" data-i18n="resetTitle">重置 Litestart</div>
+        <div class="modal-header" data-i18n="resetTitle">重置 LitestartCE</div>
         <div style="padding: 8px 0 16px 0; color: var(--neutral-foreground-rest); font-size: 14px; line-height: 1.6;">
-          <p style="margin: 0;" data-i18n="resetDesc">如果你遇到了一些问题，或是对于目前的设定不满意，重置可以清除所有数据并还原 Litestart 为初始状态，请注意，此操作不可撤回！</p>
+          <p style="margin: 0;" data-i18n="resetDesc">如果你遇到了一些问题，或是对于目前的设定不满意，重置可以清除所有数据并还原 LitestartCE 为初始状态，请注意，此操作不可撤回！</p>
         </div>
         <div class="modal-footer">
           <div class="modal-footer-right">

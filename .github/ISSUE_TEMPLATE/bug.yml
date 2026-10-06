@@ -1,7 +1,7 @@
 name: 错误问题反馈 Bug Report
 description: 反馈遇到的问题 Feedback the encountered issues
 labels: ["Bug"]
-assignees: "XingYueFox"
+assignees: "yujianxi666"
 
 body:
   - type: markdown
@@ -39,7 +39,7 @@ body:
 
   - type: input
     attributes:
-      label: Litestart版本 Litestart Version
+      label: LitestartCE版本 LitestartCE Version
     validations:
       required: false
 

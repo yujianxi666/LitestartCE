@@ -1,5 +1,5 @@
-const APP_VERSION = '1.7.2';           // 发行版本
-const GITHUB_REPO = 'XingYueFox/Litestart';
+const APP_VERSION = '1.7.2';           // 发行版本（沿用上游 Litestart 的版本号，LitestartCE 为其个性化分支）
+const GITHUB_REPO = 'yujianxi666/LitestartCE';
 
 // 当前是否暗色主题：读取 <html data-theme>（由头部脚本与设置面板写入）
 function isDarkTheme() {
@@ -62,10 +62,14 @@ const i18nData = {
     AomiRaku: '羽梦千景',
     forYou: '为您呈现',
     disclaimer: '请注意，此网页与 Microsoft 无关。',
-    aboutTitle: '关于 Litestart',
+    aboutTitle: '关于 LitestartCE',
     download: '下载',
     updateAvailable: '可用更新',
     aboutDesc: '一个简洁、快速的浏览器起始页。',
+    aboutEdition: 'LitestartCE 是 Litestart 的二次开发版本',
+    aboutUpstream: '基于 <a href="https://github.com/XingYueFox/Litestart" target="_blank" rel="noopener" style="color: var(--accent-foreground-rest); ">Litestart</a>',
+    developedBy: '由',
+    secondDev: '二次开发',
     litever: '版本 1.7.2 | 更新时间：2026-10-4',
     versionInfo: '版本信息',
     and: '和',
@@ -108,6 +112,9 @@ const i18nData = {
     forceBingCNDesc: '<b>开启</b>：强制使用必应中国版<br><b>关闭</b>：根据网络环境自动选择。<br>此选项可以避免代理设置导致 www.bing.com 无法自动跳转到 cn.bing.com。',
     enhancedVisibility: '增强元素可见性',
     enhancedVisibilityDesc: '开启背景时给Logo和顶部按钮添加半透明背景，使其在背景图上更清晰',
+    bgBlur: '背景模糊程度',
+    changeEngineIcon: '更换图标',
+    resetEngineIcon: '恢复原版图标',
     addlink: '添加',
 
     // 个人资料菜单
@@ -131,8 +138,8 @@ const i18nData = {
     next: '下一步',
 
     // 重置确认弹窗
-    resetTitle: '重置 Litestart',
-    resetDesc: '如果你遇到了一些问题，或是对于目前的设定不满意，重置可以清除所有数据并还原 Litestart 为初始状态，请注意，此操作不可撤回！',
+    resetTitle: '重置 LitestartCE',
+    resetDesc: '如果你遇到了一些问题，或是对于目前的设定不满意，重置可以清除所有数据并还原 LitestartCE 为初始状态，请注意，此操作不可撤回！',
     confirmReset: '确定',
 
     // 重置完成弹窗
@@ -174,6 +181,19 @@ const i18nData = {
     alignLeft: '左端对齐',
     alignCenter: '居中',
     alignRight: '右端对齐',
+    alignHint: '靠左 / 靠右时搜索框位置不变，标题与快速链接收在搜索框边界内（留出一点间距）',
+    // 搜索框形状 / 元素大小 / 滑块小按钮
+    searchBoxShape: '搜索框形状',
+    linksShape: '快速链接形状',
+    shapeRound: '圆形',
+    shapeSquare: '方形',
+    elementSize: '元素大小',
+    sizeLogo: '标题大小',
+    sizeSearch: '搜索框大小',
+    sizeLinks: '快速链接大小',
+    sizeSmaller: '调小',
+    sizeLarger: '调大',
+    resetSlider: '重置为默认值',
   },
   'zh-TW': {
     pageTitle: '新分頁',
@@ -206,10 +226,14 @@ const i18nData = {
     AomiRaku: '羽梦千景',
     forYou: '為您呈現',
     disclaimer: '請注意，此網頁與 Microsoft 無關。',
-    aboutTitle: '關於 Litestart',
+    aboutTitle: '關於 LitestartCE',
     download: '下載',
     updateAvailable: '可用更新',
     aboutDesc: '一個簡潔、快速的瀏覽器起始頁。',
+    aboutEdition: 'LitestartCE 是 Litestart 的二次開發版本',
+    aboutUpstream: '基於 <a href="https://github.com/XingYueFox/Litestart" target="_blank" rel="noopener" style="color: var(--accent-foreground-rest); ">Litestart</a>',
+    developedBy: '由',
+    secondDev: '二次開發',
     litever: '版本 1.7.2 | 更新時間：2026-10-4',
     versionInfo: '版本資訊',
     and: '與',
@@ -252,6 +276,9 @@ const i18nData = {
     forceBingCNDesc: '<b>開啟</b>：強制使用必應中國版<br><b>關閉</b>：根據網路環境自動選擇。<br>此選項可以避免代理設定導致 www.bing.com 無法自動跳轉到 cn.bing.com。',
     enhancedVisibility: '增強元素可見性',
     enhancedVisibilityDesc: '開啟背景時給Logo和頂部按鈕添加半透明背景，使其在背景圖上更清晰',
+    bgBlur: '背景模糊程度',
+    changeEngineIcon: '更換圖標',
+    resetEngineIcon: '恢復原版圖標',
     addlink: '新增',
     accountDetails: '編輯帳戶資訊',
     manageProfiles: '管理設定檔',
@@ -267,8 +294,8 @@ const i18nData = {
     importConfig: '還原設定',
     initConfigOption: '重設設定',
     next: '下一步',
-    resetTitle: '重設 Litestart',
-    resetDesc: '如果你遇到了一些問題，或是對於目前的設定不滿意，重設可以清除所有數據並還原 Litestart 為初始狀態，請注意，此操作不可撤回！',
+    resetTitle: '重設 LitestartCE',
+    resetDesc: '如果你遇到了一些問題，或是對於目前的設定不滿意，重設可以清除所有數據並還原 LitestartCE 為初始狀態，請注意，此操作不可撤回！',
     confirmReset: '確定',
     resetDoneTitle: '重設完成',
     resetDoneDesc: '所有設定已重設為初始狀態，頁面即將重新整理。',
@@ -301,6 +328,18 @@ const i18nData = {
     alignLeft: '左端對齊',
     alignCenter: '居中',
     alignRight: '右端對齊',
+    alignHint: '靠左 / 靠右時搜尋框位置不變，標題與快速連結收在搜尋框邊界內（留出一點間距）',
+    searchBoxShape: '搜尋框形狀',
+    linksShape: '快速連結形狀',
+    shapeRound: '圓形',
+    shapeSquare: '方形',
+    elementSize: '元素大小',
+    sizeLogo: '標題大小',
+    sizeSearch: '搜尋框大小',
+    sizeLinks: '快速連結大小',
+    sizeSmaller: '調小',
+    sizeLarger: '調大',
+    resetSlider: '重設為預設值',
  },
   'zh-WY': {
     pageTitle: '新籤頁',
@@ -333,6 +372,10 @@ const i18nData = {
     AomiRaku: '羽梦千景',
     forYou: '呈獻',
     disclaimer: '謹告：此頁與微軟無涉。',
+    aboutEdition: 'LitestartCE 乃 Litestart 之二次開發本',
+    aboutUpstream: '本於 <a href="https://github.com/XingYueFox/Litestart" target="_blank" rel="noopener" style="color: var(--accent-foreground-rest); ">Litestart</a>',
+    developedBy: '由',
+    secondDev: '二次開發',
     and: '及',
     searchPlaceholder: '或搜或鍵，惟網址依',
     searchInput: '搜尋之框',
@@ -369,6 +412,9 @@ const i18nData = {
     forceBingCNDesc: '<b>啟</b>：勒令必應專用中土之版<br><b>關</b>：隨網路之勢自擇。<br>此舉可免代理令主站失其自轉之能。',
     enhancedVisibility: '彰明諸元',
     enhancedVisibilityDesc: '啟背景時，徽標頂鈕之下施輕翳，映於畫圖而愈晰',
+    bgBlur: '底景朦朧之度',
+    changeEngineIcon: '易其徽',
+    resetEngineIcon: '復其原徽',
     //页面布局页（第二页）/ 主题模式（新增）
     back: '返',
     themeMode: '主題',
@@ -384,6 +430,18 @@ const i18nData = {
     alignLeft: '左端相齊',
     alignCenter: '居中',
     alignRight: '右端相齊',
+    alignHint: '左右相齊者，搜器不移，題與捷徑斂於搜器界內，各留少許之隔',
+    searchBoxShape: '搜器之形',
+    linksShape: '捷徑之形',
+    shapeRound: '圓',
+    shapeSquare: '方',
+    elementSize: '諸元大小',
+    sizeLogo: '題之大小',
+    sizeSearch: '搜器之大小',
+    sizeLinks: '捷徑之大小',
+    sizeSmaller: '縮',
+    sizeLarger: '張',
+    resetSlider: '復其初值',
     addlink: '增',
     accountDetails: '改易簡策，存真去偽',
     manageProfiles: '掌檔',
@@ -400,7 +458,7 @@ const i18nData = {
     initConfigOption: '復初',
     next: '續',
     resetTitle: '復初',
-    resetDesc: '倘遭困顿，或厌时制，可复初以涤万设，返 Litestart 于鸿蒙。然此举不可追，慎之慎之！',
+    resetDesc: '倘遭困顿，或厌时制，可复初以涤万设，返 LitestartCE 于鸿蒙。然此举不可追，慎之慎之！',
     confirmReset: '定',
     resetDoneTitle: '妙哉！返本归元',
     resetDoneDesc: '万设归初，新页将启，天光焕然。',
@@ -439,10 +497,14 @@ const i18nData = {
     AomiRaku: 'Raku Inkyetta',
     forYou: '',
     disclaimer: 'Note: This page is not affiliated with Microsoft.',
-    aboutTitle: 'About Litestart',
+    aboutTitle: 'About LitestartCE',
     download: 'Download',
     updateAvailable: 'Update available',
     aboutDesc: 'A simple and fast browser start page.',
+    aboutEdition: 'LitestartCE is a second-development version of Litestart',
+    aboutUpstream: 'Based on <a href="https://github.com/XingYueFox/Litestart" target="_blank" rel="noopener" style="color: var(--accent-foreground-rest); ">Litestart</a>',
+    developedBy: 'Developed by',
+    secondDev: 'as a second development',
     litever: 'Version 1.7.2 | Updated: 2026-10-4',
     versionInfo: 'Version Info',
     and: '&',
@@ -486,6 +548,9 @@ const i18nData = {
     forceBingCNDesc: '<b>On</b>: Forces cn.bing.com<br><b>Off</b>: Automatically selects based on network conditions.<br>This option prevents proxy settings from interfering with automatic redirection of www.bing.com to cn.bing.com.',
     enhancedVisibility: 'Enhance Element Visibility',
     enhancedVisibilityDesc: 'Adds semi-transparent backgrounds to Logo and header buttons when background is enabled for better clarity',
+    bgBlur: 'Background blur',
+    changeEngineIcon: 'Change icon',
+    resetEngineIcon: 'Restore default icon',
     addlink: 'Add',
     accountDetails: 'Edit Account',
     manageProfiles: 'Manage Profiles',
@@ -501,8 +566,8 @@ const i18nData = {
     importConfig: 'Import Config',
     initConfigOption: 'Reset Config',
     next: 'Next',
-    resetTitle: 'Reset Litestart',
-    resetDesc: 'If you encounter issues or are unsatisfied with current settings, resetting will clear all data and restore Litestart to its initial state. Note: This action cannot be undone!',
+    resetTitle: 'Reset LitestartCE',
+    resetDesc: 'If you encounter issues or are unsatisfied with current settings, resetting will clear all data and restore LitestartCE to its initial state. Note: This action cannot be undone!',
     confirmReset: 'Confirm',
     resetDoneTitle: 'Reset Complete',
     resetDoneDesc: 'All settings have been reset to initial state. The page will refresh.',
@@ -535,6 +600,18 @@ const i18nData = {
     alignLeft: 'Align left edges',
     alignCenter: 'Center',
     alignRight: 'Align right edges',
+    alignHint: 'Left / right keeps the search box in place and tucks the title and quick links just inside its edges',
+    searchBoxShape: 'Search box shape',
+    linksShape: 'Quick links shape',
+    shapeRound: 'Rounded',
+    shapeSquare: 'Square',
+    elementSize: 'Element size',
+    sizeLogo: 'Title size',
+    sizeSearch: 'Search box size',
+    sizeLinks: 'Quick links size',
+    sizeSmaller: 'Smaller',
+    sizeLarger: 'Larger',
+    resetSlider: 'Reset to default',
 
   },
   'ja': {
@@ -568,10 +645,14 @@ const i18nData = {
     AomiRaku: 'Raku Inkyetta',
     forYou: '',
     disclaimer: '注: このページは Microsoft とは関係ありません。',
-    aboutTitle: 'Litestart について',
+    aboutTitle: 'LitestartCE について',
     download: 'ダウンロード',
     updateAvailable: 'アップデートがあります',
     aboutDesc: 'シンプルで高速なブラウザスタートページです。',
+    aboutEdition: 'LitestartCE は Litestart の二次開発版です',
+    aboutUpstream: '<a href="https://github.com/XingYueFox/Litestart" target="_blank" rel="noopener" style="color: var(--accent-foreground-rest); ">Litestart</a> をベースに',
+    developedBy: '開発:',
+    secondDev: 'による二次開発',
     litever: 'バージョン 1.7.2 | 更新日: 2026-10-4',
     versionInfo: 'バージョン情報',
     and: 'と',
@@ -615,6 +696,9 @@ const i18nData = {
     forceBingCNDesc: '<b>ON</b>：cn.bing.com を強制使用<br><b>OFF</b>：ネットワーク環境に応じて自動的に選択<br>このオプションにより、プロキシ設定による www.bing.com から cn.bing.com への自動リダイレクトの妨げを防ぎます。',
     enhancedVisibility: '要素の視認性を向上',
     enhancedVisibilityDesc: '背景有効時にロゴとヘッダーボタンに半透明の背景を追加し、見やすくします',
+    bgBlur: '背景のぼかし',
+    changeEngineIcon: 'アイコンを変更',
+    resetEngineIcon: '既定のアイコンに戻す',
     addlink: '追加',
     accountDetails: 'アカウント編集',
     manageProfiles: 'プロファイル管理',
@@ -630,8 +714,8 @@ const i18nData = {
     importConfig: '設定をインポート',
     initConfigOption: '設定をリセット',
     next: '次へ',
-    resetTitle: 'Litestartをリセット',
-    resetDesc: '問題が発生した場合や現在の設定に満足できない場合、リセットするとすべてのデータが消去されLitestartが初期状態に戻ります。この操作は元に戻せません！',
+    resetTitle: 'LitestartCEをリセット',
+    resetDesc: '問題が発生した場合や現在の設定に満足できない場合、リセットするとすべてのデータが消去されLitestartCEが初期状態に戻ります。この操作は元に戻せません！',
     confirmReset: 'リセット',
     resetDoneTitle: 'リセット完了',
     resetDoneDesc: 'すべての設定が初期状態にリセットされました。ページが更新されます。',
@@ -664,6 +748,18 @@ const i18nData = {
     alignLeft: '左端を揃える',
     alignCenter: '中央',
     alignRight: '右端を揃える',
+    alignHint: '左端 / 右端では検索ボックスは動かず、タイトルとクイックリンクが検索ボックスの内側に少し入ります',
+    searchBoxShape: '検索ボックスの形状',
+    linksShape: 'クイックリンクの形状',
+    shapeRound: '丸型',
+    shapeSquare: '角型',
+    elementSize: '要素の大きさ',
+    sizeLogo: 'タイトルの大きさ',
+    sizeSearch: '検索ボックスの大きさ',
+    sizeLinks: 'クイックリンクの大きさ',
+    sizeSmaller: '小さく',
+    sizeLarger: '大きく',
+    resetSlider: '既定値に戻す',
   },
   'ru': {
     pageTitle: 'Новая вкладка',
@@ -696,10 +792,14 @@ const i18nData = {
     AomiRaku: 'Raku Inkyetta',
     forYou: '',
     disclaimer: 'Примечание: Эта страница не связана с Microsoft.',
-    aboutTitle: 'О Litestart',
+    aboutTitle: 'О LitestartCE',
     download: 'Скачать',
     updateAvailable: 'Доступно обновление',
     aboutDesc: 'Простая и быстрая страница запуска браузера.',
+    aboutEdition: 'LitestartCE — версия Litestart, доработанная сторонним разработчиком',
+    aboutUpstream: 'На основе <a href="https://github.com/XingYueFox/Litestart" target="_blank" rel="noopener" style="color: var(--accent-foreground-rest); ">Litestart</a>',
+    developedBy: 'Разработал:',
+    secondDev: '— вторичная разработка',
     litever: 'Версия 1.7.2 | Обновлено: 2026-10-4',
     versionInfo: 'Информация о версии',
     and: 'и',
@@ -742,6 +842,9 @@ const i18nData = {
     forceBingCNDesc: '<b>Вкл.</b>: Принудительно использует cn.bing.com<br><b>Выкл.</b>: Автоматический выбор в зависимости от сетевых условий<br>Этот параметр предотвращает проблемы с прокси, мешающие автоматическому редиректу www.bing.com на cn.bing.com.',
     enhancedVisibility: 'Повысить видимость элементов',
     enhancedVisibilityDesc: 'Добавляет полупрозрачный фон к логотипу и кнопкам заголовка при включенном фоне для лучшей читаемости',
+    bgBlur: 'Размытие фона',
+    changeEngineIcon: 'Сменить значок',
+    resetEngineIcon: 'Вернуть исходный значок',
     addlink: 'Добавить',
     accountDetails: 'Редактировать аккаунт',
     manageProfiles: 'Управление профилями',
@@ -757,8 +860,8 @@ const i18nData = {
     importConfig: 'Импорт настроек',
     initConfigOption: 'Сброс настроек',
     next: 'Далее',
-    resetTitle: 'Сбросить Litestart',
-    resetDesc: 'Если у вас возникли проблемы или вы недовольны текущими настройками, сброс удалит все данные и восстановит Litestart в исходное состояние. Обратите внимание: это действие необратимо!',
+    resetTitle: 'Сбросить LitestartCE',
+    resetDesc: 'Если у вас возникли проблемы или вы недовольны текущими настройками, сброс удалит все данные и восстановит LitestartCE в исходное состояние. Обратите внимание: это действие необратимо!',
     confirmReset: 'Подтвердить',
     resetDoneTitle: 'Сброс завершён',
     resetDoneDesc: 'Все настройки сброшены до исходного состояния. Страница будет обновлена.',
@@ -793,6 +896,18 @@ const i18nData = {
     alignLeft: 'По левым краям',
     alignCenter: 'По центру',
     alignRight: 'По правым краям',
+    alignHint: 'При выравнивании по краям строка поиска остаётся на месте, а заголовок и быстрые ссылки сдвигаются чуть внутрь от её краёв',
+    searchBoxShape: 'Форма строки поиска',
+    linksShape: 'Форма быстрых ссылок',
+    shapeRound: 'Круглая',
+    shapeSquare: 'Квадратная',
+    elementSize: 'Размер элементов',
+    sizeLogo: 'Размер заголовка',
+    sizeSearch: 'Размер строки поиска',
+    sizeLinks: 'Размер быстрых ссылок',
+    sizeSmaller: 'Уменьшить',
+    sizeLarger: 'Увеличить',
+    resetSlider: 'Сбросить к значению по умолчанию',
 
   }
 };
@@ -1114,6 +1229,7 @@ const WallpaperDB = {
     if (this._db) return Promise.resolve(this._db);
     if (this._initPromise) return this._initPromise;
     this._initPromise = new Promise((resolve, reject) => {
+      // 注意：库名沿用上游的 LitestartWallpaper，改名会让老用户的已上传壁纸读不出来
       const req = indexedDB.open('LitestartWallpaper', 1);
       req.onupgradeneeded = (e) => {
         e.target.result.createObjectStore('blob', { keyPath: 'key' });
@@ -1804,6 +1920,20 @@ document.addEventListener('DOMContentLoaded', () => {
     url: ''
   });
 
+  // 各搜索引擎的自定义图标（原版图标仍保留在 logos 表里，随时可恢复）
+  let customEngineLogos = Storage.get('ntp_engine_logos', {});
+  if (!customEngineLogos || typeof customEngineLogos !== 'object' || Array.isArray(customEngineLogos)) {
+    customEngineLogos = {};
+  }
+
+  // 搜索引擎图标相关的 DOM。必须在下面 setLogo / 初始化之前取好：
+  // updateEngineIconButtons 在初始化阶段就会被调用，而这些 const 若声明在调用点之后，
+  // 会因暂时性死区抛 ReferenceError 并中断整个 DOMContentLoaded（后面挂的监听器全部丢失）
+  const btnChangeEngineIcon = document.getElementById('btn-change-engine-icon');
+  const btnResetEngineIcon = document.getElementById('btn-reset-engine-icon');
+  const inputQuickEngineLogo = document.getElementById('input-quick-engine-logo');
+  const engineIconActions = document.getElementById('engine-icon-actions');
+
   const engineSearchUrls = {
     bing: 'https://www.bing.com/search?q=',
     baidu: 'https://www.baidu.com/s?wd=',
@@ -1878,6 +2008,28 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       return;
     }
+    // 用户为当前引擎换过图标：优先显示自定义图标
+    const customLogo = customEngineLogos[engine];
+    if (customLogo) {
+      logoContainer.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = customLogo;
+      img.alt = '';
+      img.className = 'custom-engine-logo';
+      // 图标失效时退回原版图标，不留破图
+      img.onerror = () => {
+        img.remove();
+        setLogoDefault(engine);
+      };
+      logoContainer.appendChild(img);
+      return;
+    }
+    setLogoDefault(engine);
+  }
+
+  // 显示内置（原版）图标
+  function setLogoDefault(engine) {
+    if (!logoContainer) return;
     if (logos[engine] !== undefined) {
       const logoContent = logos[engine];
       // 百度/谷歌为函数（按主题取图），其余为静态字符串
@@ -1986,6 +2138,25 @@ document.addEventListener('DOMContentLoaded', () => {
   let searchVisible = Storage.get('ntp_search_visible', true);
   let showLogo = Storage.get('ntp_show_logo', true);
 
+  // ===== 背景模糊程度 =====
+  // 只改两个合成层的 filter，不碰遮罩与页面元素，因此对图片和视频壁纸都生效
+  const backgroundContainer = document.getElementById('background-container');
+  const rangeBgBlur = document.getElementById('range-bg-blur');
+  const valueBgBlur = document.getElementById('value-bg-blur');
+  const BG_BLUR_MAX = rangeBgBlur ? Number(rangeBgBlur.max) || 24 : 24;
+  let bgBlur = Number(Storage.get('ntp_bg_blur', 0));
+  if (!Number.isFinite(bgBlur)) bgBlur = 0;
+  bgBlur = Math.min(BG_BLUR_MAX, Math.max(0, Math.round(bgBlur)));
+
+  // 写入 CSS 变量；模糊时给容器加 .blurred 让背景放大一点，遮掉模糊产生的虚边
+  function applyBgBlur() {
+    document.documentElement.style.setProperty('--bg-blur', bgBlur + 'px');
+    backgroundContainer?.classList.toggle('blurred', bgBlur > 0);
+    if (valueBgBlur) valueBgBlur.textContent = bgBlur + 'px';
+  }
+  if (rangeBgBlur) rangeBgBlur.value = bgBlur;
+  applyBgBlur();
+
   // 获取今天的日期字符串，如 "2026-09-03"，用于判断壁纸是否过期
   function getTodayStr() {
     const d = new Date();
@@ -2043,6 +2214,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setLogo(savedEngine);
   updateEngineEditButton(savedEngine);
   updateForceBingCNRow(savedEngine);
+  updateEngineIconButtons(savedEngine);
   // 主题与标题图/图标对齐（头部脚本已提前写入 data-theme，这里做一次兜底同步）
   applyThemeMode(themeMode, { persist: false });
   document.body.setAttribute('data-layout', savedLayout);
@@ -2344,11 +2516,20 @@ document.addEventListener('DOMContentLoaded', () => {
     'ntp_layout_gap_links',
     'ntp_layout_offset_x',
     'ntp_layout_offset_y',
-    'ntp_layout_align'
+    'ntp_layout_align',
+    // 背景模糊程度 / 各搜索引擎的自定义图标
+    'ntp_bg_blur',
+    'ntp_engine_logos',
+    // 元素大小（百分比）与搜索框形状
+    'ntp_layout_scale_logo',
+    'ntp_layout_scale_search',
+    'ntp_layout_scale_links',
+    'ntp_search_shape',
+    'ntp_links_shape'
   ];
   // 以纯字符串保存的设置项（界面语言），导入时需要原样写回
   const RAW_CONFIG_KEYS = ['liteStart_language'];
-  // 恢复配置时只接受 Litestart 自己的键，避免写入无关数据
+  // 恢复配置时只接受 LitestartCE 自己的键，避免写入无关数据
   const RESTORABLE_KEY_PATTERN = /^(ntp_|liteStart_)/;
 
   const DEFAULT_MANAGE_ACTION = 'export';
@@ -2462,7 +2643,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const a = document.createElement('a');
     a.href = url;
     const dateStr = new Date().toISOString().slice(0, 10);
-    a.download = `Litestart_Backup_${dateStr}.json`;
+    a.download = `LitestartCE_Backup_${dateStr}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -2889,28 +3070,86 @@ inputOnlineUrl?.addEventListener('input', () => {
   const valueOffsetX = document.getElementById('value-offset-x');
   const valueOffsetY = document.getElementById('value-offset-y');
   const selectLayoutAlign = document.getElementById('select-layout-align');
+  const selectSearchShape = document.getElementById('select-search-shape');
+  const selectLinksShape = document.getElementById('select-links-shape');
 
-  let layoutGapTitle = Storage.get('ntp_layout_gap_title', 72);
-  let layoutGapLinks = Storage.get('ntp_layout_gap_links', 64);
-  let layoutOffsetX = Storage.get('ntp_layout_offset_x', 0);
-  let layoutOffsetY = Storage.get('ntp_layout_offset_y', 0);
+  // 三个可缩放元素的大小滑块（百分比，100 = 原大小）
+  const rangeSizeLogo = document.getElementById('range-size-logo');
+  const rangeSizeSearch = document.getElementById('range-size-search');
+  const rangeSizeLinks = document.getElementById('range-size-links');
+  const valueSizeLogo = document.getElementById('value-size-logo');
+  const valueSizeSearch = document.getElementById('value-size-search');
+  const valueSizeLinks = document.getElementById('value-size-links');
+
+  // 各控件的出厂默认值：重置按钮回到这里（间距类默认不是 0，所以不能一律归零）
+  const LAYOUT_DEFAULTS = {
+    'range-gap-title': 72,
+    'range-gap-links': 64,
+    'range-offset-x': 0,
+    'range-offset-y': 0,
+    'range-size-logo': 100,
+    'range-size-search': 100,
+    'range-size-links': 100
+  };
+
+  let layoutGapTitle = Storage.get('ntp_layout_gap_title', LAYOUT_DEFAULTS['range-gap-title']);
+  let layoutGapLinks = Storage.get('ntp_layout_gap_links', LAYOUT_DEFAULTS['range-gap-links']);
+  let layoutOffsetX = Storage.get('ntp_layout_offset_x', LAYOUT_DEFAULTS['range-offset-x']);
+  let layoutOffsetY = Storage.get('ntp_layout_offset_y', LAYOUT_DEFAULTS['range-offset-y']);
   let layoutAlign = Storage.get('ntp_layout_align', 'center');
+  let layoutScaleLogo = Storage.get('ntp_layout_scale_logo', 100);
+  let layoutScaleSearch = Storage.get('ntp_layout_scale_search', 100);
+  let layoutScaleLinks = Storage.get('ntp_layout_scale_links', 100);
+  let searchShape = Storage.get('ntp_search_shape', 'round');
+  let linksShape = Storage.get('ntp_links_shape', 'round');
+
+  // 把可能被改坏/越界的存量值收敛回滑块范围
+  function clampToSlider(input, value) {
+    if (!input) return value;
+    const min = Number(input.min), max = Number(input.max);
+    const v = Number(value);
+    if (!Number.isFinite(v)) return Number(input.value) || 0;
+    return Math.min(Number.isFinite(max) ? max : v, Math.max(Number.isFinite(min) ? min : v, v));
+  }
+  layoutScaleLogo = clampToSlider(rangeSizeLogo, layoutScaleLogo);
+  layoutScaleSearch = clampToSlider(rangeSizeSearch, layoutScaleSearch);
+  layoutScaleLinks = clampToSlider(rangeSizeLinks, layoutScaleLinks);
+  if (searchShape !== 'square') searchShape = 'round';
+  if (linksShape !== 'square') linksShape = 'round';
 
   // 对齐取值 -> #inner 的 justify-items
   const LAYOUT_ALIGN_VALUES = { left: 'start', center: 'center', right: 'end' };
+  // 标题/快速链接与搜索框左右边界之间留的视觉间距（像素）
+  const LAYOUT_ALIGN_GAP = 16;
 
-  // 对齐基准线两侧的内缩量：
-  // 以最宽的搜索框为基准，靠左/靠右时三个元素各自在“基准列”内左端/右端对齐；
-  // 两侧内缩相等，因此搜索框（基准列）本身的位置完全不变，主体位置保持原样。
-  function layoutAlignInset() {
-    if (layoutAlign === 'center') return 0;
-    const viewportWidth = document.documentElement.clientWidth;
-    const refWidth = searchContainer ? searchContainer.getBoundingClientRect().width : 0;
-    if (!viewportWidth || !refWidth) return 0;
-    return Math.max(0, Math.round((viewportWidth - refWidth) / 2));
+  // 搜索框的布局矩形（视口坐标）。
+  // 先临时摘掉 transform 再量 —— getBoundingClientRect 给的是缩放后的视觉宽度，
+  // 那样「元素大小」一改基准线就会跟着动。
+  function measureSearchBoxRect() {
+    if (!searchContainer) return null;
+    const inlineTransform = searchContainer.style.transform;
+    searchContainer.style.transform = 'none';
+    const rect = searchContainer.getBoundingClientRect();
+    searchContainer.style.transform = inlineTransform;
+    return rect;
   }
 
-  // 把间距/对齐/偏移写入 CSS 变量（#inner 网格与 展望 布局均引用这些变量）
+  // 对齐内缩量：两侧对称，写成 padding 只加在「标题」和「快速链接」自己身上，
+  // 不动 #inner 的 padding —— 否则网格内容区会被压缩，比它更宽的搜索框会溢出、位移。
+  // 靠左：两个元素的左端 = 搜索框左边 + GAP；靠右：右端 = 搜索框右边 - GAP。
+  function layoutAlignInsets() {
+    const zero = { left: 0, right: 0 };
+    if (layoutAlign === 'center') return zero;
+    const rect = measureSearchBoxRect();
+    if (!rect) return zero;
+    const viewportWidth = document.documentElement.clientWidth;
+    if (layoutAlign === 'left') {
+      return { left: Math.max(0, Math.round(rect.left + LAYOUT_ALIGN_GAP)), right: 0 };
+    }
+    return { left: 0, right: Math.max(0, Math.round(viewportWidth - rect.right + LAYOUT_ALIGN_GAP)) };
+  }
+
+  // 把间距/对齐/偏移/大小写入 CSS 变量（#inner 网格与 展望 布局均引用这些变量）
   function applyLayoutTuning() {
     const rootStyle = document.documentElement.style;
     rootStyle.setProperty('--layout-gap-title', layoutGapTitle + 'px');
@@ -2918,12 +3157,35 @@ inputOnlineUrl?.addEventListener('input', () => {
     rootStyle.setProperty('--layout-offset-x', layoutOffsetX + 'px');
     rootStyle.setProperty('--layout-offset-y', layoutOffsetY + 'px');
     rootStyle.setProperty('--layout-align', LAYOUT_ALIGN_VALUES[layoutAlign] || 'center');
-    rootStyle.setProperty('--layout-align-inset', layoutAlignInset() + 'px');
+    // 对齐内缩只写在这两个元素自己的 padding 上（搜索框位置恒定不变）
+    const alignInsets = layoutAlignInsets();
+    rootStyle.setProperty('--layout-align-inset-left', alignInsets.left + 'px');
+    rootStyle.setProperty('--layout-align-inset-right', alignInsets.right + 'px');
+    // 标题/快速链接贴哪一侧；居中时不贴边
+    rootStyle.setProperty('--layout-align-edge',
+      layoutAlign === 'left' ? 'start' : (layoutAlign === 'right' ? 'end' : 'center'));
+    // 供 CSS 判断是否需要把搜索框按回居中（靠左/靠右时它不跟着走）
+    document.body.setAttribute('data-align-mode', layoutAlign);
+    // 元素大小（百分比 -> 倍数）
+    rootStyle.setProperty('--layout-scale-logo', String(layoutScaleLogo / 100));
+    rootStyle.setProperty('--layout-scale-search', String(layoutScaleSearch / 100));
+    rootStyle.setProperty('--layout-scale-links', String(layoutScaleLinks / 100));
+    // 缩放基点跟随对齐方式：靠左/靠右时以那一侧为基点，
+    // 否则放大后元素会被推离对齐基准线（左端对齐就不再是左端对齐）
+    rootStyle.setProperty('--layout-scale-origin',
+      layoutAlign === 'left' ? 'left center' : (layoutAlign === 'right' ? 'right center' : 'center center'));
+    // 搜索框形状
+    rootStyle.setProperty('--search-radius', searchShape === 'square' ? '8px' : '22px');
+    // 快速链接图标形状
+    rootStyle.setProperty('--quicklink-radius', linksShape === 'square' ? '10px' : '50%');
 
     if (valueGapTitle) valueGapTitle.textContent = layoutGapTitle + 'px';
     if (valueGapLinks) valueGapLinks.textContent = layoutGapLinks + 'px';
     if (valueOffsetX) valueOffsetX.textContent = layoutOffsetX + 'px';
     if (valueOffsetY) valueOffsetY.textContent = layoutOffsetY + 'px';
+    if (valueSizeLogo) valueSizeLogo.textContent = layoutScaleLogo + '%';
+    if (valueSizeSearch) valueSizeSearch.textContent = layoutScaleSearch + '%';
+    if (valueSizeLinks) valueSizeLinks.textContent = layoutScaleLinks + '%';
   }
 
   // 控件初始值回填
@@ -2931,7 +3193,12 @@ inputOnlineUrl?.addEventListener('input', () => {
   if (rangeGapLinks) rangeGapLinks.value = layoutGapLinks;
   if (rangeOffsetX) rangeOffsetX.value = layoutOffsetX;
   if (rangeOffsetY) rangeOffsetY.value = layoutOffsetY;
+  if (rangeSizeLogo) rangeSizeLogo.value = layoutScaleLogo;
+  if (rangeSizeSearch) rangeSizeSearch.value = layoutScaleSearch;
+  if (rangeSizeLinks) rangeSizeLinks.value = layoutScaleLinks;
   if (selectLayoutAlign) selectLayoutAlign.value = layoutAlign;
+  if (selectSearchShape) selectSearchShape.value = searchShape;
+  if (selectLinksShape) selectLinksShape.value = linksShape;
   applyLayoutTuning();
 
   // 窗口尺寸变化时重算对齐基准（搜索框宽度随断点变化）
@@ -2945,29 +3212,59 @@ inputOnlineUrl?.addEventListener('input', () => {
     });
   });
 
-  // 间距/偏移滑块：拖动即时生效并保存
-  rangeGapTitle?.addEventListener('input', (e) => {
-    layoutGapTitle = Number(e.target.value);
-    Storage.set('ntp_layout_gap_title', layoutGapTitle);
-    applyLayoutTuning();
+  // ===== 滑块统一接线：拖动即时生效并保存 =====
+  // 变量名用 setter 指定，因为下面这些值是 let 绑定，不能通过对象属性改写
+  const LAYOUT_SLIDERS = [
+    { input: rangeGapTitle, key: 'ntp_layout_gap_title', unit: 'px', set: v => { layoutGapTitle = v; } },
+    { input: rangeGapLinks, key: 'ntp_layout_gap_links', unit: 'px', set: v => { layoutGapLinks = v; } },
+    { input: rangeOffsetX, key: 'ntp_layout_offset_x', unit: 'px', set: v => { layoutOffsetX = v; } },
+    { input: rangeOffsetY, key: 'ntp_layout_offset_y', unit: 'px', set: v => { layoutOffsetY = v; } },
+    { input: rangeSizeLogo, key: 'ntp_layout_scale_logo', unit: '%', set: v => { layoutScaleLogo = v; } },
+    { input: rangeSizeSearch, key: 'ntp_layout_scale_search', unit: '%', set: v => { layoutScaleSearch = v; } },
+    { input: rangeSizeLinks, key: 'ntp_layout_scale_links', unit: '%', set: v => { layoutScaleLinks = v; } }
+  ];
+
+  LAYOUT_SLIDERS.forEach(({ input, key, set }) => {
+    input?.addEventListener('input', (e) => {
+      set(Number(e.target.value));
+      Storage.set(key, Number(e.target.value));
+      applyLayoutTuning();
+    });
   });
 
-  rangeGapLinks?.addEventListener('input', (e) => {
-    layoutGapLinks = Number(e.target.value);
-    Storage.set('ntp_layout_gap_links', layoutGapLinks);
+  // 把某个滑块拨到指定值（滑块本身、状态变量、存储一起改）
+  function setLayoutSliderValue(id, value) {
+    const cfg = LAYOUT_SLIDERS.find(s => s.input && s.input.id === id);
+    if (!cfg) return;
+    cfg.input.value = value;
+    cfg.set(value);
+    Storage.set(cfg.key, value);
     applyLayoutTuning();
+    // 让滑块有一下高亮反馈，提示"这里被点了"
+    cfg.input.focus({ preventScroll: true });
+  }
+
+  // 方形圆角重置按钮：回到该控件的出厂默认值
+  document.querySelectorAll('.mini-btn[data-reset-slider]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-reset-slider');
+      if (LAYOUT_DEFAULTS[id] === undefined) return;
+      setLayoutSliderValue(id, LAYOUT_DEFAULTS[id]);
+    });
   });
 
-  rangeOffsetX?.addEventListener('input', (e) => {
-    layoutOffsetX = Number(e.target.value);
-    Storage.set('ntp_layout_offset_x', layoutOffsetX);
-    applyLayoutTuning();
-  });
-
-  rangeOffsetY?.addEventListener('input', (e) => {
-    layoutOffsetY = Number(e.target.value);
-    Storage.set('ntp_layout_offset_y', layoutOffsetY);
-    applyLayoutTuning();
+  // 调大 / 调小按钮：按滑块自己的 step 走一格
+  document.querySelectorAll('.mini-btn[data-size-step]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const input = document.getElementById(btn.getAttribute('data-size-target'));
+      if (!input) return;
+      const dir = Number(btn.getAttribute('data-size-step')) || 0;
+      const step = Number(input.step) || 5;
+      const min = Number(input.min), max = Number(input.max);
+      let next = Number(input.value) + dir * step;
+      next = Math.min(max, Math.max(min, next));
+      setLayoutSliderValue(input.id, next);
+    });
   });
 
   // 元素对齐（左端对齐 / 居中 / 右端对齐）
@@ -2977,6 +3274,80 @@ inputOnlineUrl?.addEventListener('input', () => {
     applyLayoutTuning();
   });
 
+  // 搜索框形状（圆形 / 方形）
+  selectSearchShape?.addEventListener('change', (e) => {
+    searchShape = e.target.value === 'square' ? 'square' : 'round';
+    Storage.set('ntp_search_shape', searchShape);
+    applyLayoutTuning();
+  });
+
+  // 快速链接形状（圆形 / 方形）
+  selectLinksShape?.addEventListener('change', (e) => {
+    linksShape = e.target.value === 'square' ? 'square' : 'round';
+    Storage.set('ntp_links_shape', linksShape);
+    applyLayoutTuning();
+  });
+
+  // 背景模糊滑块：拖动即时生效并保存
+  rangeBgBlur?.addEventListener('input', (e) => {
+    bgBlur = Math.min(BG_BLUR_MAX, Math.max(0, Number(e.target.value) || 0));
+    Storage.set('ntp_bg_blur', bgBlur);
+    applyBgBlur();
+  });
+
+
+  // ===== 搜索引擎图标：更换 / 恢复原版 =====
+  // 这几个元素在上面（setLogo 之前）已经取过，这里不再重复声明
+
+  // 当前引擎是否用着自定义图标；顺带控制"更换/恢复"按钮的显隐
+  function updateEngineIconButtons(engine) {
+    // 自定义引擎的图标由上面的"编辑自定义搜索引擎"弹窗负责，这里隐藏
+    const isCustomEngine = engine === 'custom';
+    if (engineIconActions) engineIconActions.style.display = isCustomEngine ? 'none' : 'flex';
+    if (btnChangeEngineIcon) btnChangeEngineIcon.style.display = isCustomEngine ? 'none' : 'inline-flex';
+    if (btnResetEngineIcon) {
+      const canReset = !isCustomEngine && Boolean(customEngineLogos[engine]);
+      btnResetEngineIcon.style.display = canReset ? 'inline-flex' : 'none';
+    }
+  }
+
+  // 保存/删除图标后统一刷新首页 Logo 与按钮状态
+  function applyEngineIconChange(engine) {
+    Storage.set('ntp_engine_logos', customEngineLogos);
+    if (selectEngine && selectEngine.value === engine) setLogo(engine);
+    updateEngineIconButtons(engine);
+  }
+
+  btnChangeEngineIcon?.addEventListener('click', () => {
+    inputQuickEngineLogo?.click();
+  });
+
+  inputQuickEngineLogo?.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      inputQuickEngineLogo.value = '';
+      return;
+    }
+    const engine = selectEngine ? selectEngine.value : 'bing';
+    try {
+      // 标题类图片：压到 600px 宽并存 PNG，保留透明通道
+      customEngineLogos[engine] = await compressLogoImage(file, { maxWidth: 600 });
+      applyEngineIconChange(engine);
+    } catch (err) {
+      console.error('搜索引擎图标处理失败:', err);
+    }
+    inputQuickEngineLogo.value = '';
+  });
+
+  btnResetEngineIcon?.addEventListener('click', () => {
+    const engine = selectEngine ? selectEngine.value : 'bing';
+    if (customEngineLogos[engine]) {
+      delete customEngineLogos[engine];
+      applyEngineIconChange(engine);
+    }
+  });
+
 
   // 设置面板切换监听
   selectEngine?.addEventListener('change', (e) => {
@@ -2984,6 +3355,7 @@ inputOnlineUrl?.addEventListener('input', () => {
     setLogo(val);
     updateEngineEditButton(val);
     updateForceBingCNRow(val);
+    updateEngineIconButtons(val);
     Storage.set('ntp_engine', val);
     if (val === 'custom' && (!customEngineConfig.url || customEngineConfig.url === 'https://duckduckgo.com/?q=%s')) {
       openCustomEngineModal();

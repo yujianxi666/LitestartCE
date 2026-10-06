@@ -1,17 +1,20 @@
 # 隐私政策 / Privacy Policy
 
 **最后更新日期：** 2026年8月23日
-**产品：** Litestart
+**产品：** LitestartCE（Litestart 的个性化分支）
 **适用平台：** 网页版和浏览器扩展应用
-**编辑自：** XingYue_Fox
+**上游原版编辑：** XingYue_Fox
+
+> LitestartCE 是 [Litestart](https://github.com/XingYueFox/Litestart) 的个性化分支，
+> 未改动原版的数据处理方式，本页内容在原版隐私政策基础上仅做名称与出处说明的修订。
 
 ## 1. 数据收集与使用
 
-Litestart是一个**新标签页**
+LitestartCE 是一个**新标签页**
 
 作为扩展是一个**新标签页替换工具**，所有功能均**在用户本地浏览器中运行**。
 
-Litestart**不会主动收集、传输或存储**您的任何个人信息。
+LitestartCE **不会主动收集、传输或存储**您的任何个人信息。
 
 为实现核心功能，作为**扩展**会在您的**本地浏览器**中存储以下数据：
 - **快速链接列表**：您添加的网站名称和网址（存储在 `chrome.storage.local`）
@@ -21,7 +24,7 @@ Litestart**不会主动收集、传输或存储**您的任何个人信息。
 
 ## 2. 数据存储
 
-请注意，作为**网页**，为实现核心功能，Litestart将使用Cookie来保存您的设置
+请注意，作为**网页**，为实现核心功能，LitestartCE 将使用 Cookie 来保存您的设置
 
 作为扩展，**所有数据均仅存储在您的本地设备上**，使用浏览器内置的 `chrome.storage.local` API 进行保存[reference:10]。
 
@@ -49,13 +52,16 @@ Litestart**不会主动收集、传输或存储**您的任何个人信息。
 
 在您搜索内容时，搜索引擎会收到你的搜索请求然后返回提示词条
 
+在您打开「关于」弹窗时，扩展会向 GitHub 公开 API 请求本仓库的最新版本号以提示更新，不附带任何用户数据。
 
 ## 6. 关于此产品
 
-请注意，Litestart时一款完全免费且开源的工具，请勿从来源不明的地方获取此插件，否则造成的一切后果自负！
+LitestartCE 是一款完全免费且开源的工具，请勿从来源不明的地方获取此插件，否则造成的一切后果自负！
 
 此网页/扩展，仅用于学习、测试与自有设备调优。
 
 ## 7. 隐私政策的变更
 
 我们可能会不定期更新本隐私政策。如有重大变更，会通过更新本页面进行通知。
+
+原版隐私政策请见：[XingYueFox/Litestart · PRIVACY_POLICY.md](https://github.com/XingYueFox/Litestart/blob/main/PRIVACY_POLICY.md)
