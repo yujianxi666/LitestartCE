@@ -14,6 +14,7 @@
 > 原版 Litestart 由 [星月Fox](https://xingyuefox.pages.dev) 与 [AomiRaku](https://raku404.com/) 开发，
 > 本分支的全部基础设计与绝大部分代码都来自原版，遵循 MIT 协议。
 > 预览效果 [LitestartCE](https://yujianxi666.github.io/LitestartCE)
+
 ***
 
 ## 更加个性化的Litestart二次开发版
@@ -56,7 +57,7 @@ LitestartCE 保持了原版Litestart"干净、快、类原生"的特点，同时
 - 在相对更多个性化的同时也可以享受到极致的速度
 - 所有设置与数据都保存在你的浏览器本地
 
-> 仓库内 `docs/pics` 下的截图来自原版 Litestart，界面与本分支基本一致；
+> 仓库内 `docs/pics` 下拥有ce后缀的截图来自 LitestartCE（本分支）；
 > 主题模式、布局微调等新增项以实际页面为准。
 
 ## 特色功能
@@ -83,7 +84,7 @@ LitestartCE 保持了原版Litestart"干净、快、类原生"的特点，同时
 ## 重要声明
 
 *LitestartCE 完全免费，请勿从来源不明的地方获取此插件，否则造成的一切后果自负！<br>
-*本分支为个人定制版本，功能取舍与稳定性由作者个人使用场景决定，**不代表原版 Litestart 的立场**，也不承诺与原版同步更新。<br>
+*本分支为二次开发版本，功能取舍与稳定性由作者决定，**不代表原版 Litestart 的立场**，也不承诺完全与原版同步更新。<br>
 *此网页/插件，仅用于学习、测试与自有设备调优。<br>
 *请尊重原作者的劳动成果：转发、二次修改请保留原版署名与 MIT 协议。
 

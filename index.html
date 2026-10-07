@@ -553,13 +553,73 @@
       display: block;
     }
 
+    /* 滑块：自绘轨道 + 圆形滑钮（原来只靠 accent-color，观感很廉价）。
+       已填充比例由脚本写进 --slider-fill，轨道用渐变做出"已填充/未填充"两段 */
     .setting-slider {
       flex: 1;
       min-width: 0;
-      height: 18px;
+      height: 22px;
       margin: 0;
-      accent-color: var(--accent-foreground-rest);
+      padding: 0;
+      background: transparent;
       cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      --slider-fill: 0%;
+    }
+
+    .setting-slider::-webkit-slider-runnable-track {
+      height: 5px;
+      border-radius: 999px;
+      background: linear-gradient(to right,
+        var(--accent-foreground-rest) 0 var(--slider-fill),
+        var(--settings-thumb-bg) var(--slider-fill) 100%);
+    }
+
+    .setting-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      margin-top: -4.5px;      /* (14 - 5) / 2，让滑钮在轨道上垂直居中 */
+      border-radius: 50%;
+      background: var(--settings-card-bg);
+      border: 2px solid var(--accent-foreground-rest);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
+      transition: transform 0.08s ease;
+    }
+
+    .setting-slider:hover::-webkit-slider-thumb {
+      transform: scale(1.12);
+    }
+
+    .setting-slider:active::-webkit-slider-thumb {
+      transform: scale(0.94);
+    }
+
+    .setting-slider:focus-visible::-webkit-slider-thumb {
+      box-shadow: 0 0 0 3px var(--neutral-fill-hover), 0 1px 3px rgba(0, 0, 0, 0.28);
+    }
+
+    .setting-slider::-moz-range-track {
+      height: 5px;
+      border-radius: 999px;
+      background: var(--settings-thumb-bg);
+    }
+
+    .setting-slider::-moz-range-progress {
+      height: 5px;
+      border-radius: 999px;
+      background: var(--accent-foreground-rest);
+    }
+
+    .setting-slider::-moz-range-thumb {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--settings-card-bg);
+      border: 2px solid var(--accent-foreground-rest);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.28);
     }
 
     .setting-slider-value {
@@ -1206,6 +1266,32 @@
       list-style: none;
       margin: 0;
       padding: 6px 0;
+      /* 历史/联想条目多时可以上下滚动（约 6 条后出现滚动条） */
+      max-height: 320px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: var(--settings-thumb-border) transparent;
+    }
+
+    .suggestion-list::-webkit-scrollbar {
+      width: 6px;
+      background: transparent;
+    }
+
+    .suggestion-list::-webkit-scrollbar-track {
+      background: transparent;
+      border-radius: 10px;
+    }
+
+    .suggestion-list::-webkit-scrollbar-thumb {
+      background: var(--settings-thumb-border);
+      border-radius: 10px;
+      transition: background 0.1s;
+    }
+
+    .suggestion-list::-webkit-scrollbar-thumb:hover {
+      background: var(--settings-text-secondary);
     }
 
     .suggestion-item {
@@ -1244,6 +1330,42 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    /* 历史记录单条删除按钮：默认隐形，悬停/选中时才出现，避免列表太花 */
+    .suggestion-delete-btn {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 5px;
+      background: transparent;
+      color: var(--neutral-foreground-rest);
+      opacity: 0;
+      cursor: pointer;
+      transition: opacity 0.08s ease, background-color 0.08s ease;
+    }
+
+    .suggestion-item:hover .suggestion-delete-btn,
+    .suggestion-item.selected .suggestion-delete-btn,
+    .suggestion-delete-btn:focus-visible {
+      opacity: 0.7;
+    }
+
+    .suggestion-delete-btn:hover {
+      opacity: 1;
+      background-color: var(--neutral-fill-hover);
+    }
+
+    .suggestion-delete-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+      opacity: 1;
     }
 
     .suggestions-footer {
@@ -1750,6 +1872,69 @@
       line-height: 1;
     }
 
+    /* ===== 问候语浮窗 =====
+       打开页面时在搜索框下方弹出，停留约 2 秒后淡出（见 script.js 的 scheduleGreetingBanner）。
+       配色全部走主题变量，因此跟随「主题模式」与背景模糊设置；
+       圆角复用 --search-radius，和搜索框形状保持一致 */
+    #greeting-banner {
+      position: absolute;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%) translateY(6px);
+      max-width: min(80vw, 520px);
+      box-sizing: border-box;
+      padding: 9px 22px;
+      border-radius: var(--search-radius, 22px);
+      background-color: var(--neutral-layer-floating);
+      color: var(--neutral-foreground-rest);
+      border: 1px solid var(--modal-border);
+      box-shadow: var(--shadow16);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.3;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0.35s;
+      z-index: 4;
+    }
+
+    #greeting-banner.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+      transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0s;
+    }
+
+    /* 用户自定义问候语时的输入框行 */
+    .greeting-input-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .greeting-input-row .greeting-input-label {
+      flex-shrink: 0;
+      width: 46px;
+      font-size: 13px;
+      color: var(--settings-text-secondary);
+    }
+
+    .greeting-input-row .input-container {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .greeting-input-row .input {
+      height: 32px;
+      font-size: 13px;
+    }
+
     /* ===== 拖拽排序样式 ===== */
     .quicklink-item.dragging {
       opacity: 0.35;
@@ -2121,6 +2306,22 @@
                     </label>
                   </div>
                 </div>
+                <!-- 搜索历史展示数量（实际保留条数固定 60，不可改） -->
+                <div class="settings-card-title" style="margin-top: 12px;" data-i18n="historyVisible">搜索历史展示数量</div>
+                <div class="custom-select-wrapper">
+                  <select id="select-history-visible" class="select-box" tabindex="-1" aria-label="搜索历史展示数量">
+                    <option value="5" data-i18n="rows5">5 条</option>
+                    <option value="10" data-i18n="rows10">10 条</option>
+                    <option value="20" data-i18n="rows20">20 条</option>
+                    <option value="50" data-i18n="rows50">50 条</option>
+                  </select>
+                  <div class="custom-select-display" data-for="select-history-visible">
+                    <span class="custom-select-text"></span>
+                    <svg class="custom-select-arrow" viewBox="0 0 12 12" fill="none">
+                      <path d="M2.22 4.47a.75.75 0 0 1 1.06 0L6 7.19l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L2.22 5.53a.75.75 0 0 1 0-1.06z" fill="currentColor"/>
+                    </svg>
+                  </div>
+                </div>
               </div>
 
               <!-- 页面布局视图选择 -->
@@ -2350,7 +2551,36 @@
                   </div>
                 </div>
 
-                <!-- 小块 3：元素排布（四个滑块 + 重置） -->
+                <!-- 小块 3：问候语（三个时段自定义文案，打开页面时弹窗展示） -->
+                <div class="settings-card">
+                  <div class="settings-block">
+                    <div class="settings-block-title" data-i18n="greetingEditor">问候语</div>
+                    <div class="settings-block-hint" style="margin-top: 0; margin-bottom: 4px;" data-i18n="greetingHint">打开页面时弹出，约 2 秒后消失；留空则使用默认文案</div>
+
+                    <div class="greeting-input-row">
+                      <span class="greeting-input-label" data-i18n="greetingMorning">早上</span>
+                      <div class="input-container">
+                        <input type="text" class="input" id="input-greeting-morning" maxlength="40" data-i18n-ph="greetingPlaceholder" placeholder="例如：早上好">
+                      </div>
+                    </div>
+
+                    <div class="greeting-input-row">
+                      <span class="greeting-input-label" data-i18n="greetingAfternoon">下午</span>
+                      <div class="input-container">
+                        <input type="text" class="input" id="input-greeting-afternoon" maxlength="40" data-i18n-ph="greetingPlaceholder" placeholder="例如：下午好">
+                      </div>
+                    </div>
+
+                    <div class="greeting-input-row">
+                      <span class="greeting-input-label" data-i18n="greetingEvening">晚上</span>
+                      <div class="input-container">
+                        <input type="text" class="input" id="input-greeting-evening" maxlength="40" data-i18n-ph="greetingPlaceholder" placeholder="例如：晚上好">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 小块 4：元素排布（四个滑块 + 重置） -->
                 <div class="settings-card">
                   <div class="settings-block">
                     <div class="settings-block-title" data-i18n="elementSpacing">元素排布</div>
@@ -2535,6 +2765,9 @@
 
         <!-- 快速链接列表（全部由脚本按可用宽度动态渲染） -->
         <ntp-quicklinks id="quicklinks" rows="0"></ntp-quicklinks>
+
+        <!-- 问候语浮窗：打开页面时弹出，约 2 秒后淡出（文案可在页面设置里编辑） -->
+        <div id="greeting-banner" role="status" aria-live="polite"></div>
       </div>
     </ntp-shell>
 
@@ -2734,7 +2967,9 @@
           <div class="form-group" style="margin-bottom: 20px;">
             <label class="form-label" data-i18n="profileAvatar">头像</label>
             <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
-              <img id="profile-avatar-preview" src="img/profiles.png" alt="头像预览" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; background-color: var(--settings-thumb-bg); border: 1px solid var(--settings-card-border);">
+              <!-- 无默认头像图（仓库里没有 img/profiles.png），
+                   留空 src 并在加载失败时隐藏，避免显示破图；用户选了头像后由脚本填入 -->
+              <img id="profile-avatar-preview" alt="头像预览" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; background-color: var(--settings-thumb-bg); border: 1px solid var(--settings-card-border);">
               <div style="display: flex; gap: 8px;">
                 <button type="button" class="btn btn-secondary" id="btn-upload-avatar" data-i18n="uploadAvatar">选择头像</button>
                 <button type="button" class="btn btn-secondary" id="btn-remove-avatar" data-i18n="removeAvatar" style="display: none;">删除头像</button>

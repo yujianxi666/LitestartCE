@@ -1,1 +1,4 @@
 .idea/
+
+# 打包产物（由 tools/build-packages.ps1 生成，不入库）
+dist/

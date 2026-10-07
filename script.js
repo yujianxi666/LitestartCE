@@ -46,6 +46,21 @@ const i18nData = {
     custom: '自定义',
     editCustomEngine: '编辑自定义搜索引擎',
     saveHistory: '保存搜索历史记录',
+    historyVisible: '搜索历史展示数量',
+    rows5: '5 条',
+    rows10: '10 条',
+    rows20: '20 条',
+    rows50: '50 条',
+    // 问候语：三个时段的内置默认文案 + 编辑器文案
+    greetMorning: '早上好',
+    greetNoon: '下午好',
+    greetEvening: '晚上好',
+    greetingEditor: '问候语',
+    greetingHint: '打开页面时弹出，约 2 秒后消失；留空则使用默认文案',
+    greetingMorning: '早上',
+    greetingAfternoon: '下午',
+    greetingEvening: '晚上',
+    greetingPlaceholder: '留空使用默认文案',
     layout: '页面布局',
     inspirational: '展望',
     focused: '聚焦',
@@ -210,6 +225,20 @@ const i18nData = {
     custom: '自訂',
     editCustomEngine: '編輯自訂搜尋引擎',
     saveHistory: '儲存搜尋紀錄',
+    historyVisible: '搜尋歷史展示數量',
+    rows5: '5 條',
+    rows10: '10 條',
+    rows20: '20 條',
+    rows50: '50 條',
+    greetMorning: '早安',
+    greetNoon: '下午好',
+    greetEvening: '晚上好',
+    greetingEditor: '問候語',
+    greetingHint: '開啟頁面時彈出，約 2 秒後消失；留空則使用預設文案',
+    greetingMorning: '早上',
+    greetingAfternoon: '下午',
+    greetingEvening: '晚上',
+    greetingPlaceholder: '留空使用預設文案',
     layout: '頁面佈局',
     inspirational: '展望',
     focused: '聚焦',
@@ -356,6 +385,20 @@ const i18nData = {
     custom: '自訂',
     editCustomEngine: '訂搜器',
     saveHistory: '搜錄',
+    historyVisible: '搜錄示幾許',
+    rows5: '五條',
+    rows10: '十條',
+    rows20: '廿條',
+    rows50: '五十條',
+    greetMorning: '晨安',
+    greetNoon: '日昃安',
+    greetEvening: '晚安',
+    greetingEditor: '問候之語',
+    greetingHint: '啟頁則浮現，二息而隱；空則用原語',
+    greetingMorning: '晨',
+    greetingAfternoon: '昃',
+    greetingEvening: '夜',
+    greetingPlaceholder: '空則用原語',
     layout: '佈局',
     inspirational: '展望',
     focused: '專注',
@@ -481,6 +524,20 @@ const i18nData = {
     custom: 'Custom',
     editCustomEngine: 'Edit custom search engine',
     saveHistory: 'Save search history',
+    historyVisible: 'Search history shown',
+    rows5: '5 items',
+    rows10: '10 items',
+    rows20: '20 items',
+    rows50: '50 items',
+    greetMorning: 'Good morning',
+    greetNoon: 'Good afternoon',
+    greetEvening: 'Good evening',
+    greetingEditor: 'Greeting',
+    greetingHint: 'Shown in a popup for about 2 seconds when the page opens; leave blank to use the default',
+    greetingMorning: 'Morning',
+    greetingAfternoon: 'Afternoon',
+    greetingEvening: 'Evening',
+    greetingPlaceholder: 'Blank = default',
     layout: 'Layout',
     inspirational: 'Inspirational',
     focused: 'Focused',
@@ -629,6 +686,20 @@ const i18nData = {
     custom: 'カスタム',
     editCustomEngine: 'カスタム検索エンジンを編集',
     saveHistory: '検索履歴を保存',
+    historyVisible: '検索履歴の表示件数',
+    rows5: '5 件',
+    rows10: '10 件',
+    rows20: '20 件',
+    rows50: '50 件',
+    greetMorning: 'おはようございます',
+    greetNoon: 'こんにちは',
+    greetEvening: 'こんばんは',
+    greetingEditor: 'あいさつ',
+    greetingHint: 'ページを開いたときに約 2 秒だけ表示されます。空欄なら既定の文言',
+    greetingMorning: '朝',
+    greetingAfternoon: '午後',
+    greetingEvening: '夜',
+    greetingPlaceholder: '空欄なら既定',
     layout: 'レイアウト',
     inspirational: 'シンプル',
     focused: 'フォーカス',
@@ -776,6 +847,20 @@ const i18nData = {
     custom: 'Пользовательская',
     editCustomEngine: 'Изменить поисковую систему',
     saveHistory: 'Сохранять историю поиска',
+    historyVisible: 'Сколько записей показывать',
+    rows5: '5 записей',
+    rows10: '10 записей',
+    rows20: '20 записей',
+    rows50: '50 записей',
+    greetMorning: 'Доброе утро',
+    greetNoon: 'Добрый день',
+    greetEvening: 'Добрый вечер',
+    greetingEditor: 'Приветствие',
+    greetingHint: 'Показывается во всплывающем окне около 2 секунд при открытии страницы; пустое поле — текст по умолчанию',
+    greetingMorning: 'Утро',
+    greetingAfternoon: 'День',
+    greetingEvening: 'Вечер',
+    greetingPlaceholder: 'Пусто = по умолчанию',
     layout: 'Макет',
     inspirational: 'Вдохновение',
     focused: 'Фокус',
@@ -1042,6 +1127,9 @@ function applyLanguage(langConfig) {
 
   // 12.同步「快速链接」的“添加”按钮文案（避免整页重扫，也不必重建整个列表）
   if (typeof syncQuicklinksLanguage === 'function') syncQuicklinksLanguage();
+
+  // 13.问候语编辑器里的占位符由 data-i18n-ph 自动刷新；
+  //     自定义文案按原样显示，不需要跟着语言走
 
   // ===== 工具提示(Tooltip) 初始化 =====
 
@@ -1368,11 +1456,81 @@ function getDomain(urlStr) {
   }
 }
 
-// 获取网站缩略图
-function getFaviconUrl(urlStr) {
+// ===== 网站图标（favicon）解析与缓存 =====
+// 优先用站点自己的 /favicon.ico（少一次第三方连接、更快、也不把域名交出去），
+// 只有它取不到时才回退到第三方图标服务。
+// 每个域名解析出的首选地址做本地缓存，一次成功/失败都不会在每次开新标签页时重试。
+const FAVICON_CACHE_KEY = 'ntp_favicon_cache';
+const FAVICON_CACHE_LIMIT = 300;
+
+const FaviconCache = {
+  data: null,
+  load() {
+    if (this.data) return this.data;
+    try {
+      const raw = localStorage.getItem(FAVICON_CACHE_KEY);
+      const parsed = raw ? JSON.parse(raw) : null;
+      this.data = (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) ? parsed : {};
+    } catch (e) {
+      this.data = {};
+    }
+    return this.data;
+  },
+  save() {
+    try {
+      const entries = Object.entries(this.data);
+      // 超量后丢掉最早写入的一批，避免 localStorage 无限膨胀
+      if (entries.length > FAVICON_CACHE_LIMIT) {
+        const trimmed = entries.slice(entries.length - FAVICON_CACHE_LIMIT);
+        this.data = Object.fromEntries(trimmed);
+      }
+      localStorage.setItem(FAVICON_CACHE_KEY, JSON.stringify(this.data));
+    } catch (e) {
+      // 配额满等异常：放弃写缓存即可，不影响图标显示
+    }
+  },
+  remember(domain, url) {
+    const cache = this.load();
+    if (cache[domain] === url) return;
+    cache[domain] = url;
+    this.save();
+  },
+  clear() {
+    this.data = {};
+    try { localStorage.removeItem(FAVICON_CACHE_KEY); } catch (e) {}
+  }
+};
+
+// 站点自己的 favicon 地址（根目录，扩展上下文中即站点根域）
+function siteFaviconUrl(urlStr) {
+  const domain = getDomain(urlStr);
+  if (!domain) return '';
+  return 'https://' + domain + '/favicon.ico';
+}
+
+// 第三方图标服务（仅在前者取不到时使用）
+function fallbackFaviconUrl(urlStr) {
   const domain = getDomain(urlStr);
   if (!domain) return '';
   return `https://api.xinac.net/icon/?url=${domain}`;
+}
+
+// 候选顺序由 getFaviconCandidates 决定，交给 createQuicklinkNode 里的 onerror 链式调用
+function getFaviconCandidates(urlStr) {
+  const domain = getDomain(urlStr);
+  if (!domain) return [];
+  const list = [];
+  const cache = FaviconCache.load();
+  if (cache[domain]) list.push(cache[domain]);
+  else list.push(siteFaviconUrl(urlStr), fallbackFaviconUrl(urlStr));
+  return list.filter(Boolean);
+}
+
+// 记录"哪个候选最终成功了"，下次直接用它，避免每次都白跑一遍失败请求
+function rememberFaviconCandidate(urlStr, finalUrl) {
+  const domain = getDomain(urlStr);
+  if (!domain || !finalUrl) return;
+  FaviconCache.remember(domain, finalUrl);
 }
 
 // 对用户输入进行 HTML 转义，防止 XSS
@@ -1632,6 +1790,86 @@ function decodeInput(str) {
   window.addEventListener('scroll', repositionOrClose, true);
 }
 
+// ===== 搜索历史相关上限 =====
+// 实际保留的条数：固定值，用户不可改（写死 60 条）
+const HISTORY_KEEP_MAX = 60;
+// 下拉列表里可选的"展示数量"档位
+const HISTORY_VISIBLE_OPTIONS = [5, 10, 20, 50];
+
+// ===== 问候语 =====
+
+// 三个时段及其起始小时（用户只能改文案，不能改时间）。
+// 晚上这一档跨零点：18:00 - 次日 03:59 都算晚上
+const GREETING_BUCKETS = [
+  { key: 'morning',   startHour: 4,  i18nKey: 'greetMorning', storeKey: 'ntp_greeting_morning' },
+  { key: 'afternoon', startHour: 12, i18nKey: 'greetNoon',    storeKey: 'ntp_greeting_afternoon' },
+  { key: 'evening',   startHour: 18, i18nKey: 'greetEvening', storeKey: 'ntp_greeting_evening' }
+];
+
+// 当前小时落在哪个时段
+function getGreetingBucket(date = new Date()) {
+  const h = date.getHours();
+  if (h >= 4 && h < 12) return 'morning';
+  if (h >= 12 && h < 18) return 'afternoon';
+  return 'evening';
+}
+
+// 该时段的内置默认文案（跟随界面语言）
+function getDefaultGreetingText(bucket) {
+  const cfg = GREETING_BUCKETS.find(b => b.key === bucket) || GREETING_BUCKETS[0];
+  const dict = window._i18nDict
+    || i18nData[getResolvedLanguageCode(localStorage.getItem('liteStart_language') || 'auto')]
+    || i18nData['zh-CN'];
+  return (dict && dict[cfg.i18nKey]) || (i18nData['zh-CN'] && i18nData['zh-CN'][cfg.i18nKey]) || '';
+}
+
+// 某时段的实际文案：用户自定义优先，留空回退默认。
+// 自定义内容按原样展示，所以先反转义
+function getGreetingTextForBucket(bucket) {
+  const cfg = GREETING_BUCKETS.find(b => b.key === bucket) || GREETING_BUCKETS[0];
+  const custom = decodeInput(String(Storage.get(cfg.storeKey, '') || '').trim());
+  return custom || getDefaultGreetingText(bucket);
+}
+
+// 当前时段应显示的问候语
+function getGreetingText() {
+  return getGreetingTextForBucket(getGreetingBucket());
+}
+
+// ===== 问候语浮窗：打开页面弹出，约 2 秒后淡出 =====
+let greetingBannerTimer = null;
+
+function hideGreetingBanner() {
+  if (greetingBannerTimer) {
+    clearTimeout(greetingBannerTimer);
+    greetingBannerTimer = null;
+  }
+  document.getElementById('greeting-banner')?.classList.remove('visible');
+}
+
+function showGreetingBanner() {
+  const banner = document.getElementById('greeting-banner');
+  if (!banner) return;
+  const text = getGreetingText();
+  if (!text) return;
+  hideGreetingBanner();
+  banner.textContent = text;
+  // 先以隐藏态渲染一帧，再加 .visible，淡入动画才会生效
+  void banner.offsetWidth;
+  banner.classList.add('visible');
+  greetingBannerTimer = setTimeout(() => {
+    banner.classList.remove('visible');
+    greetingBannerTimer = null;
+  }, 2000);
+}
+
+// 编辑器输入框 id → 时段
+const GREETING_INPUT_TO_BUCKET = {
+  'input-greeting-morning': 'morning',
+  'input-greeting-afternoon': 'afternoon',
+  'input-greeting-evening': 'evening'
+};
+
 // 重新同步自定义下拉菜单的显示文本与选项（语言切换后调用）
 function refreshCustomSelects() {
   document.querySelectorAll('.custom-select-display').forEach(display => {
@@ -1756,6 +1994,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const forceBingCNRow = document.getElementById('force-bing-cn-row');
   const toggleForceBingCN = document.getElementById('toggle-force-bing-cn');
   const toggleHistorySwitch = document.getElementById('toggle-history-switch');
+  const selectHistoryVisible = document.getElementById('select-history-visible');
   const selectQuicklinks = document.getElementById('select-quicklinks');
   const quicklinksElem = document.getElementById('quicklinks');
   const logoContainer = document.getElementById('logo');
@@ -2054,11 +2293,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 时间开关相关函数
   let timeCapsuleTimer = null;
 
-  // 更新时间显示的当前时间与日期文本
+  // 更新时间显示的当前时间与日期。
+  // 刻意不在「未显示」时提前返回：语言切换等场景可能发生在时间模块被挂上 .active 之前
   function updateTimeCapsule() {
     const display = document.getElementById('time-display');
     if (!display) return;
-    if (!display.classList.contains('active')) return;
     const now = new Date();
     const hours = String(now.getHours()).padStart(2, '0');
     const minutes = String(now.getMinutes()).padStart(2, '0');
@@ -2128,6 +2367,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const savedQuicklinksRow = Storage.get('ntp_quicklinks', '0');
   let historyEnabled = Storage.get('ntp_history_enabled', true);
   let searchHistory = Storage.get('ntp_search_history', []);
+  // 实际保留条数固定为 HISTORY_KEEP_MAX，用户不可改；
+  // 下拉里能改的只有"下拉列表展示多少条"（HISTORY_VISIBLE_OPTIONS）
+  let historyVisible = Number(Storage.get('ntp_history_visible', 10));
+  if (!HISTORY_VISIBLE_OPTIONS.includes(historyVisible)) historyVisible = 10;
+  // 存量历史超出固定上限时在加载时裁掉，不能等到下次搜索才生效
+  if (searchHistory.length > HISTORY_KEEP_MAX) {
+    searchHistory = searchHistory.slice(0, HISTORY_KEEP_MAX);
+    Storage.set('ntp_search_history', searchHistory);
+  }
   let showTimeCapsule = Storage.get('ntp_show_time_capsule', false);
   let showMenuButton = Storage.get('ntp_show_menu_button', true);
   let forceBingCN = Storage.get('ntp_force_bing_cn', false);
@@ -2208,6 +2456,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (selectEngine) selectEngine.value = savedEngine;
   if (selectQuicklinks) selectQuicklinks.value = savedQuicklinksRow;
   if (toggleHistorySwitch) toggleHistorySwitch.checked = historyEnabled;
+  if (selectHistoryVisible) selectHistoryVisible.value = String(historyVisible);
   if (toggleForceBingCN) toggleForceBingCN.checked = forceBingCN;
   if (toggleEnhancedVisibility) toggleEnhancedVisibility.checked = enhancedVisibility;
 
@@ -2435,6 +2684,8 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem(key);
       }
     });
+    // favicon 缓存也一并丢弃（键名本身就是 ntp_，这里显式清掉内存副本）
+    FaviconCache.clear();
     // 自定义壁纸的二进制存放在 IndexedDB，也需要一并清除；
     // 个别环境（无痕/存储受限）下 IndexedDB 可能长时间无响应，最多等待 1.5s，避免卡住完成弹窗
     await Promise.race([
@@ -2500,6 +2751,11 @@ document.addEventListener('DOMContentLoaded', () => {
     'ntp_quicklinks_list',
     'ntp_history_enabled',
     'ntp_search_history',
+    'ntp_history_visible',
+    // 问候语三个时段的自定义文案
+    'ntp_greeting_morning',
+    'ntp_greeting_afternoon',
+    'ntp_greeting_evening',
     'ntp_show_time_capsule',
     'ntp_show_menu_button',
     'ntp_show_logo',
@@ -3186,6 +3442,24 @@ inputOnlineUrl?.addEventListener('input', () => {
     if (valueSizeLogo) valueSizeLogo.textContent = layoutScaleLogo + '%';
     if (valueSizeSearch) valueSizeSearch.textContent = layoutScaleSearch + '%';
     if (valueSizeLinks) valueSizeLinks.textContent = layoutScaleLinks + '%';
+
+    refreshAllSliderFills();
+  }
+
+  // 自绘滑块：把"已填充比例"写进 --slider-fill，轨道渐变据此画出已填充段。
+  // 负值区间的滑块（水平/垂直偏移）按"从最小值到当前值"的比例算，观感才是从中间往外长
+  function refreshSliderFill(input) {
+    if (!input) return;
+    const min = Number(input.min);
+    const max = Number(input.max);
+    const val = Number(input.value);
+    const span = max - min;
+    const pct = span > 0 ? ((val - min) / span) * 100 : 0;
+    input.style.setProperty('--slider-fill', Math.max(0, Math.min(100, pct)).toFixed(2) + '%');
+  }
+
+  function refreshAllSliderFills() {
+    document.querySelectorAll('.setting-slider').forEach(refreshSliderFill);
   }
 
   // 控件初始值回填
@@ -3230,6 +3504,13 @@ inputOnlineUrl?.addEventListener('input', () => {
       Storage.set(key, Number(e.target.value));
       applyLayoutTuning();
     });
+  });
+
+  // 任何滑块被拖动时同步刷新它的已填充比例（事件委托，新增滑块自动生效）
+  document.addEventListener('input', (e) => {
+    if (e.target instanceof HTMLInputElement && e.target.type === 'range' && e.target.classList.contains('setting-slider')) {
+      refreshSliderFill(e.target);
+    }
   });
 
   // 把某个滑块拨到指定值（滑块本身、状态变量、存储一起改）
@@ -3376,6 +3657,14 @@ inputOnlineUrl?.addEventListener('input', () => {
     historyEnabled = e.target.checked;
     Storage.set('ntp_history_enabled', historyEnabled);
     applyLanguage(localStorage.getItem('liteStart_language') || 'auto');
+    fetchAndShowSuggestions();
+  });
+
+  // 搜索历史展示数量：只影响下拉列表列几条，不动实际保留的历史
+  selectHistoryVisible?.addEventListener('change', (e) => {
+    const val = Number(e.target.value);
+    historyVisible = HISTORY_VISIBLE_OPTIONS.includes(val) ? val : 10;
+    Storage.set('ntp_history_visible', historyVisible);
     fetchAndShowSuggestions();
   });
 
@@ -3618,18 +3907,35 @@ inputOnlineUrl?.addEventListener('input', () => {
 
     const safeTitle = sanitizeInput(item.title);
     const initialChar = (safeTitle || 'W').charAt(0).toUpperCase();
-    const faviconUrl = getFaviconUrl(item.url);
+    const iconCandidates = getFaviconCandidates(item.url);
 
-    let iconContent = '';
-    if (faviconUrl) {
-      iconContent = `<img src="${faviconUrl}" alt="${safeTitle}" loading="lazy" 
-                        onerror="this.onerror=null; this.parentNode.innerText='${initialChar}';">`;
+    const iconElem = document.createElement('div');
+    iconElem.className = 'quicklink-icon';
+
+    if (iconCandidates.length) {
+      // 候选链：站点自身 favicon → 第三方图标服务 → 首字母兜底。
+      // 跳过的候选不会重复尝试，最终成功的地址写入缓存
+      const img = document.createElement('img');
+      img.alt = safeTitle || '';
+      img.loading = 'lazy';
+      let index = 0;
+      img.addEventListener('error', () => {
+        index += 1;
+        if (index < iconCandidates.length) {
+          img.src = iconCandidates[index];
+        } else {
+          // 全部取不到：退回首字母，别留破图
+          iconElem.textContent = initialChar;
+        }
+      });
+      img.addEventListener('load', () => rememberFaviconCandidate(item.url, img.src));
+      img.src = iconCandidates[0];
+      iconElem.appendChild(img);
     } else {
-      iconContent = initialChar;
+      iconElem.textContent = initialChar;
     }
 
     linkElem.innerHTML = `
-      <div class="quicklink-icon">${iconContent}</div>
       <span class="quicklink-title">${safeTitle}</span>
       <button type="button" class="quicklink-edit-btn" title="编辑快速链接">
         <svg width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
@@ -3637,6 +3943,7 @@ inputOnlineUrl?.addEventListener('input', () => {
         </svg>
       </button>
     `;
+    linkElem.prepend(iconElem);
 
     // 拖拽事件
     linkElem.draggable = true;
@@ -3956,14 +4263,24 @@ function onDrop(e) {
     fetchAndShowSuggestions();
   });
 
-  // 将搜索关键词存入历史记录（去重、限长50条）
+  // 删除单条搜索历史（按文本匹配，历史记录本身就是按文本去重的）
+  function deleteSearchHistory(text) {
+    const target = String(text || '').toLowerCase();
+    if (!target) return;
+    searchHistory = searchHistory.filter(item => item.toLowerCase() !== target);
+    Storage.set('ntp_search_history', searchHistory);
+    fetchAndShowSuggestions();
+  }
+
+  // 将搜索关键词存入历史记录（去重、按固定上限裁剪）
   function saveSearchHistory(query) {
     if (!historyEnabled || !query) return;
     const safeQuery = sanitizeInput(query);
     searchHistory = searchHistory.filter(item => item.toLowerCase() !== safeQuery.toLowerCase());
     searchHistory.unshift(safeQuery);
-    if (searchHistory.length > 50) {
-      searchHistory.pop();
+    // 保留条数固定为 HISTORY_KEEP_MAX，与"展示数量"设置无关
+    if (searchHistory.length > HISTORY_KEEP_MAX) {
+      searchHistory = searchHistory.slice(0, HISTORY_KEEP_MAX);
     }
     Storage.set('ntp_search_history', searchHistory);
   }
@@ -4004,7 +4321,24 @@ function onDrop(e) {
       const li = document.createElement('li');
       li.className = 'suggestion-item' + (itemObj.isHistory ? ' history' : '');
       li.innerHTML = `${itemObj.isHistory ? historySvgIcon : searchSvgIcon}<span class="suggestion-text">${sanitizeInput(itemObj.text)}</span>`;
-      
+
+      // 历史记录支持单条删除；在线联想词条不显示删除按钮
+      if (itemObj.isHistory) {
+        const delBtn = document.createElement('button');
+        delBtn.type = 'button';
+        delBtn.className = 'suggestion-delete-btn';
+        delBtn.title = (window._i18nDict && window._i18nDict.delete) || '删除';
+        delBtn.setAttribute('aria-label', delBtn.title);
+        delBtn.innerHTML = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.75.75 0 1 1 1.06 1.06L9.06 8l3.22 3.22a.75.75 0 1 1-1.06 1.06L8 9.06l-3.22 3.22a.75.75 0 0 1-1.06-1.06L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06z"/></svg>`;
+        delBtn.addEventListener('click', (e) => {
+          // 别让点击冒泡成"用这条历史去搜索"
+          e.preventDefault();
+          e.stopPropagation();
+          deleteSearchHistory(itemObj.text);
+        });
+        li.appendChild(delBtn);
+      }
+
       li.addEventListener('click', () => {
         if (searchInput) searchInput.value = decodeInput(itemObj.text);
         doSearch(itemObj.text);
@@ -4053,9 +4387,12 @@ function onDrop(e) {
     let matchedHistory = [];
     if (historyEnabled) {
       if (query) {
+        // 有搜索词时历史只做少量匹配，避免挤掉在线联想词
         matchedHistory = searchHistory.filter(h => h.toLowerCase().includes(query.toLowerCase())).slice(0, 5);
       } else {
-        matchedHistory = searchHistory.slice(0, 5);
+        // 空搜索框时列出历史，条数由「搜索历史展示数量」决定；
+        // 超出可视高度的部分靠列表滚动查看（见 .suggestion-list 的 max-height）
+        matchedHistory = searchHistory.slice(0, historyVisible);
       }
     }
 
@@ -4158,12 +4495,57 @@ searchInput?.addEventListener('input', () => {
     });
   }
 
-  // 执行搜索逻辑
+  // 形似文件扩展名的顶级标签：命中时按"搜索词"处理而不是网址。
+// 必须声明在使用它的 normalizeAsUrl 之前（const 有暂时性死区，放后面会抛错）
+const FILE_EXT_LIKE_LABELS = new Set([
+  'js', 'mjs', 'cjs', 'ts', 'jsx', 'tsx', 'json', 'html', 'htm', 'css', 'scss', 'less',
+  'py', 'rb', 'go', 'rs', 'java', 'kt', 'c', 'h', 'cpp', 'cs', 'php', 'sh', 'bat', 'ps1',
+  'md', 'txt', 'log', 'yml', 'yaml', 'toml', 'ini', 'conf', 'xml', 'csv', 'sql',
+  'zip', 'rar', '7z', 'tar', 'gz', 'exe', 'msi', 'apk', 'dmg', 'iso',
+  'png', 'jpg', 'jpeg', 'gif', 'webp', 'svg', 'ico', 'mp3', 'mp4', 'wav', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'
+]);
+
+// 判断输入是否更像一个网址（而不是搜索词）：是则直接跳转，不再走搜索引擎
+function normalizeAsUrl(raw) {
+    const text = String(raw || '').trim();
+    if (!text) return '';
+    // 带空格的一律当搜索词（网址里不会有空格）
+    if (/\s/.test(text)) return '';
+    // 显式协议：http / https / file / ftp / chrome / about / edge / view-source 等
+    if (/^[a-z][a-z0-9+.-]*:\/\//i.test(text) || /^(about|chrome|edge|file|view-source):/i.test(text)) {
+      return text;
+    }
+    // 本地地址：localhost 及带端口的变体、127.0.0.1、[::1]
+    if (/^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?(\/|$)/i.test(text)) return 'http://' + text;
+
+    // 先摘掉端口，再判断主机名（example.com:8080 也要能识别）
+    const hostWithPort = text.split(/[/?#]/)[0];
+    const host = hostWithPort.replace(/:\d+$/, '');
+    // 必须有"点"、点两侧非空，且点后是至少 2 位字母（顶级域）——
+    // 这样 3.14、v1.2 这类不会误判成网址
+    if (!/^[^\s.]+(\.[^\s.]+)*\.[a-z]{2,}$/i.test(host)) return '';
+    // 形如 xxx@yyy.com 的是邮箱，交给搜索引擎
+    if (host.includes('@')) return '';
+    // 末段是常见文件扩展名的多半是"想搜这个词"（node.js / index.html / app.py），
+    // 而不是想访问 http://node.js 这种不存在的站点
+    const lastLabel = host.split('.').pop().toLowerCase();
+    if (FILE_EXT_LIKE_LABELS.has(lastLabel)) return '';
+    return 'https://' + text;
+}
+
+  // 执行搜索逻辑（输入像网址时直接跳转）
   function doSearch(queryText = searchInput ? searchInput.value.trim() : '') {
     const query = queryText;
     if (query) {
-      saveSearchHistory(query);
+      const directUrl = normalizeAsUrl(query);
       closeSuggestions();
+
+      if (directUrl) {
+        window.location.href = directUrl;
+        return;
+      }
+
+      saveSearchHistory(query);
 
       const engine = selectEngine ? selectEngine.value : 'bing';
       let targetUrl;
@@ -4180,6 +4562,36 @@ searchInput?.addEventListener('input', () => {
       window.location.href = targetUrl;
     }
   }
+
+  // 暴露少量纯函数（只读判断，不做任何写入），用于在真实页面里跑自动化断言：
+  // 网址识别、问候语取值、favicon 候选链都是"按输入算结果"的逻辑，
+  // 而 location.href 在浏览器里无法被重定义劫持，只能留一个只读入口来验证。
+  // 若不需要，删掉这一段即可，功能本身不依赖它。
+  window.__ntpTest = {
+    normalizeAsUrl,
+    getGreetingBucket,
+    getGreetingText,
+    getGreetingTextForBucket,
+    showGreetingBanner,
+    hideGreetingBanner,
+    getFaviconCandidates
+  };
+
+  // ===== 问候语编辑器：三个时段各一个输入框，留空回退默认文案 =====
+  Object.entries(GREETING_INPUT_TO_BUCKET).forEach(([inputId, bucket]) => {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    const cfg = GREETING_BUCKETS.find(b => b.key === bucket);
+    if (!cfg) return;
+    // 回填已保存的自定义文案（存的是转义后的文本，显示前反转义）
+    input.value = decodeInput(String(Storage.get(cfg.storeKey, '') || ''));
+    input.addEventListener('input', () => {
+      Storage.set(cfg.storeKey, sanitizeInput(input.value.trim()));
+    });
+  });
+
+  // 打开新标签页时弹出问候语浮窗，停留约 2 秒
+  showGreetingBanner();
 
   // 语言选择与应用初始化
   const savedLang = localStorage.getItem('liteStart_language') || 'auto';

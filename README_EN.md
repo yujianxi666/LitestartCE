@@ -14,6 +14,7 @@ Cutting out the clutter, LitestartCE aims to provide you with a seamless, fast, 
 > The original Litestart is developed by [XingYue_Fox](https://xingyuefox.pages.dev) and [AomiRaku](https://raku404.com/),
 > and all of the original design and the vast majority of the code come from upstream, under the MIT license.
 > Preview: [LitestartCE](https://yujianxi666.github.io/LitestartCE)
+
 ***
 
 ## A more personalized, second-development version of Litestart
@@ -56,8 +57,8 @@ LitestartCE keeps the original Litestart's "clean, fast, native-like" character,
 - While offering relatively more personalization, it also delivers an ultimate fast experience
 - All settings and data are stored locally in your browser
 
-> The screenshots under `docs/pics` come from the original Litestart; the interface is essentially the same as this fork.
-> For the newly added items such as theme mode and layout tuning, please refer to the actual page.
+> The screenshots under `docs/pics` whose names end with the `ce` suffix come from LitestartCE (this fork);
+> for the newly added items such as theme mode and layout tuning, please refer to the actual page.
 
 ## Features
 
@@ -83,7 +84,7 @@ LitestartCE keeps the original Litestart's "clean, fast, native-like" character,
 ## Important Notice
 
 *LitestartCE is completely free. Please do not obtain this extension from unknown sources, otherwise you bear all the consequences!<br>
-*This fork is a personal customized version; its feature choices and stability are decided by the author's personal usage scenario, **it does not represent the position of the original Litestart**, and no synchronization with upstream is promised.<br>
+*This fork is a second-development version; its feature choices and stability are decided by the author, **it does not represent the position of the original Litestart**, and it is not promised to stay fully in sync with upstream.<br>
 *This page/extension is intended for learning, testing, and personal device optimization.<br>
 *Please respect the original authors' work: keep the original attribution and the MIT license when redistributing or modifying.
 
